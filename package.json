@@ -10,6 +10,11 @@
   "author": "Shivam Chhapola",
   "license": "ISC",
   "dependencies": {
+    "@fontsource/cabin": "^4.5.7",
+    "@fontsource/open-sans": "^4.5.11",
+    "@fontsource/overpass": "^4.5.9",
+    "@fontsource/raleway": "^4.5.10",
+    "@fontsource/rubik": "^4.5.11",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "mongoose": "^6.6.1",

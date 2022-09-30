@@ -1,4 +1,4 @@
-import { Heading, Text } from '@chakra-ui/layout';
+import { Heading, Link, Text } from '@chakra-ui/layout';
 import React, { Component } from 'react';
 import Navbar from './Navbar';
 import { Box, Flex, Button, Image, IconButton } from '@chakra-ui/react';
@@ -8,6 +8,7 @@ import TLogo from './Icons/TLogo.png';
 import HeadBack from './Icons/random-shapes.svg';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { VscNoNewline } from 'react-icons/vsc';
 
 export default class Homepage extends Component {
   componentDidMount() {
@@ -16,7 +17,7 @@ export default class Homepage extends Component {
 
   render() {
     return (
-      <Flex flexDirection="column">
+      <Flex flexDirection="column" bgColor="gray.200">
         <Box
           h={['80vh', '85vh', '90vh', '100vh']}
           bgColor="gray.800"
@@ -43,14 +44,19 @@ export default class Homepage extends Component {
               day and hang out more often.
             </Text>
             <Box>
-              <Button rightIcon={<FaArrowRight />}>Join Us</Button>
+              <Button as={Link} rightIcon={<FaArrowRight />} href="/join" _hover={{
+                textDecoration: "none",
+                backgroundColor: "gray.300",
+              }}>
+                Join Us
+              </Button>
             </Box>
           </Flex>
         </Box>
+
         <Flex
           h={['80vh', '90vh', 'auto', '100vh']}
           marginBottom="7rem"
-          bgColor="gray.50"
           align="center"
           justify="center"
           direction={['column', 'column', 'row', 'row']}
@@ -72,10 +78,10 @@ export default class Homepage extends Component {
             </Text>
           </Box>
         </Flex>
+
         <Flex
           h={['80vh', '90vh', 'auto', '100vh']}
           marginBottom="7rem"
-          bgColor="gray.50"
           align="center"
           justify="center"
           direction={['column-reverse', 'column-reverse', 'row', 'row']}
@@ -97,10 +103,10 @@ export default class Homepage extends Component {
           </Box>
           <Image src={Svg1} w={['80%', '70%', '50%', '60%']} />
         </Flex>
+
         <Flex
           h={['80vh', '90vh', 'auto', '100vh']}
           marginBottom="7rem"
-          bgColor="gray.50"
           align="center"
           justify="center"
           direction={['column', 'column', 'row', 'row']}
@@ -122,10 +128,10 @@ export default class Homepage extends Component {
             </Text>
           </Box>
         </Flex>
+
         <Flex
           h={['80vh', '90vh', 'auto', '100vh']}
           marginBottom="7rem"
-          bgColor="gray.50"
           align="center"
           justify="center"
           direction="column"
@@ -151,6 +157,7 @@ export default class Homepage extends Component {
           </Box>
           <Image src={Svg1} w={['80%', '70%', '50%', '60%']} />
         </Flex>
+
         <Flex direction="column" h="30vh" data-aos="fade-up">
           <Heading marginBottom={['1rem', '1rem', '2rem', '2rem']}>
             Ready to start your journey?
@@ -167,6 +174,7 @@ export default class Homepage extends Component {
             </Button>
           </Box>
         </Flex>
+
         <Flex
           bgColor="gray.800"
           h="5vh"
