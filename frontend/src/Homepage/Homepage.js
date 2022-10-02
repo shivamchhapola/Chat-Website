@@ -8,7 +8,6 @@ import TLogo from './Icons/TLogo.png';
 import HeadBack from './Icons/random-shapes.svg';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { VscNoNewline } from 'react-icons/vsc';
 
 export default class Homepage extends Component {
   componentDidMount() {
