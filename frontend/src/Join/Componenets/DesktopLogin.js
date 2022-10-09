@@ -76,13 +76,13 @@ export default function DesktopLogin() {
     email: '',
   });
 
-  const ChangeLoginData = (e) => {
-    setLoginData({ ...loginData, [e.target.name]: e.target.value });
-  };
+  const onLogin = () => {
+    console.log(loginData)
+  }
 
-  const ChangeSignupData = (e) => {
-    setSignupData({ ...signupData, [e.target.name]: e.target.value });
-  };
+  const onSignup = () => {
+    console.log(signupData);
+  }
 
   return (
     <AnimatePresence>
@@ -96,7 +96,8 @@ export default function DesktopLogin() {
           <motion.div variants={InputVariants} style={{ height: '60%' }}>
             <LoginElements
               className={Styles.Elements}
-              onDataChange={ChangeLoginData}
+              data={loginData}
+              setData={setLoginData}
             />
           </motion.div>
           <motion.div
@@ -113,6 +114,7 @@ export default function DesktopLogin() {
           <motion.button
             onClick={() => {
               setIsLogin(true);
+              onLogin();
             }}
             className={Styles.BtnField}
             variants={ButtonVariants}>
@@ -128,7 +130,8 @@ export default function DesktopLogin() {
           <motion.div variants={InputVariants} style={{ height: '60%' }}>
             <SignUpElements
               className={Styles.Elements}
-              onDataChange={ChangeSignupData}
+              data={signupData}
+              setData={setSignupData}
             />
           </motion.div>
           <motion.div
@@ -140,7 +143,10 @@ export default function DesktopLogin() {
             <h2 style={{ position: 'relative', top: '50%' }}>New Here?</h2>
           </motion.div>
           <motion.button
-            onClick={() => setIsLogin(false)}
+            onClick={() => {
+              setIsLogin(false);
+              onSignup();
+            }}
             className={Styles.BtnField}
             variants={ButtonVariants}>
             SignUp

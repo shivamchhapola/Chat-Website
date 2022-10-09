@@ -3,8 +3,11 @@ import { FcGoogle } from 'react-icons/fc';
 import Styles from './../styles.module.css';
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 
-export default function LoginElements({ className, onDataChange }) {
+export default function LoginElements({ className, data, setData }) {
   const [showPass, setShowPass] = useState(false);
+  const onDataChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
 
   return (
     <div className={className}>
@@ -12,6 +15,7 @@ export default function LoginElements({ className, onDataChange }) {
         <input
           name="username"
           className={Styles.InputFieldText}
+          value={data ? data['username'] : ''}
           placeholder="Username"
           onChange={(e) => onDataChange(e)}
         />
@@ -21,6 +25,7 @@ export default function LoginElements({ className, onDataChange }) {
           name="password"
           className={Styles.InputFieldText}
           placeholder="Password"
+          value={data ? data['password'] : ''}
           type={showPass ? 'text' : 'password'}
           onChange={(e) => onDataChange(e)}
         />
