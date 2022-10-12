@@ -16,7 +16,7 @@ export default function LoginElements({ className, data, setData }) {
           name="username"
           className={Styles.InputFieldText}
           value={data ? data['username'] : ''}
-          placeholder="Username"
+          placeholder="Username/Email"
           onChange={(e) => onDataChange(e)}
         />
       </div>

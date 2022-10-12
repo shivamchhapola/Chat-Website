@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { customAlphabet } from 'nanoid';
 import LoginElements from './LoginElements';
 import SignUpElements from './SignUpElements';
 import Styles from './../styles.module.css';
+import { RegistrationValidate, LoginValidate } from './../Validation';
 
 const ConVariants = {
   open: {
@@ -77,12 +79,15 @@ export default function DesktopLogin() {
   });
 
   const onLogin = () => {
-    console.log(loginData)
-  }
+    const validate = LoginValidate(loginData);
+    console.log(validate.error && validate.error.details[0].message);
+  };
 
   const onSignup = () => {
-    console.log(signupData);
-  }
+    const validate = RegistrationValidate(signupData);
+    console.log(validate.error && validate.error.details[0].message);
+    console.log(customAlphabet('0123456789shivamSHIVAMbruhBRUH', 10)());
+  };
 
   return (
     <AnimatePresence>
@@ -113,8 +118,7 @@ export default function DesktopLogin() {
           </motion.div>
           <motion.button
             onClick={() => {
-              setIsLogin(true);
-              onLogin();
+              isLogin ? onLogin() : setIsLogin(true);
             }}
             className={Styles.BtnField}
             variants={ButtonVariants}>
@@ -144,8 +148,7 @@ export default function DesktopLogin() {
           </motion.div>
           <motion.button
             onClick={() => {
-              setIsLogin(false);
-              onSignup();
+              isLogin ? setIsLogin(false) : onSignup();
             }}
             className={Styles.BtnField}
             variants={ButtonVariants}>
