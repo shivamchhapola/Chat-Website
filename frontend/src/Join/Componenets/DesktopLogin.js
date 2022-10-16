@@ -46,6 +46,27 @@ const InputVariants = {
   },
 };
 
+const ErrorVariants = {
+  open: {
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+    transitionEnd: {
+      display: 'block',
+    },
+  },
+  close: {
+    opacity: 0,
+    transition: {
+      duration: 0.5,
+    },
+    transitionEnd: {
+      display: 'hidden',
+    },
+  },
+};
+
 const ButtonVariants = {
   open: {
     backgroundColor: '#2D3748',
@@ -67,6 +88,8 @@ const ButtonVariants = {
 
 export default function DesktopLogin() {
   const [isLogin, setIsLogin] = useState(true);
+  const [loginError, setLoginError] = useState('');
+  const [registerationError, setRegistrationError] = useState('');
   const [loginData, setLoginData] = useState({
     username: '',
     password: '',
@@ -79,13 +102,35 @@ export default function DesktopLogin() {
   });
 
   const onLogin = () => {
+    if (!isLogin) {
+      setIsLogin(true);
+      setRegistrationError('');
+      setSignupData({
+        name: '',
+        password: '',
+        confirmPassword: '',
+        email: '',
+      });
+      return;
+    }
+
     const validate = LoginValidate(loginData);
-    console.log(validate.error && validate.error.details[0].message);
+    setLoginError(validate.error && validate.error.details[0].message);
   };
 
   const onSignup = () => {
+    if (isLogin) {
+      setIsLogin(false);
+      setLoginError('');
+      setLoginData({
+        username: '',
+        password: '',
+      });
+      return;
+    }
+
     const validate = RegistrationValidate(signupData);
-    console.log(validate.error && validate.error.details[0].message);
+    setRegistrationError(validate.error && validate.error.details[0].message);
     console.log(customAlphabet('0123456789shivamSHIVAMbruhBRUH', 10)());
   };
 
@@ -117,13 +162,14 @@ export default function DesktopLogin() {
             </h2>
           </motion.div>
           <motion.button
-            onClick={() => {
-              isLogin ? onLogin() : setIsLogin(true);
-            }}
+            onClick={onLogin}
             className={Styles.BtnField}
             variants={ButtonVariants}>
             Login
           </motion.button>
+          <motion.div className={Styles.JoinError} variants={ErrorVariants}>
+            {loginError}
+          </motion.div>
         </motion.div>
         <motion.div
           className={Styles.DesktopContainer}
@@ -147,13 +193,14 @@ export default function DesktopLogin() {
             <h2 style={{ position: 'relative', top: '50%' }}>New Here?</h2>
           </motion.div>
           <motion.button
-            onClick={() => {
-              isLogin ? setIsLogin(false) : onSignup();
-            }}
+            onClick={onSignup}
             className={Styles.BtnField}
             variants={ButtonVariants}>
             SignUp
           </motion.button>
+          <motion.div className={Styles.JoinError} variants={ErrorVariants}>
+            {registerationError}
+          </motion.div>
         </motion.div>
       </motion.div>
     </AnimatePresence>

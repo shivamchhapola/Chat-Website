@@ -3,6 +3,29 @@ import { AnimatePresence, motion } from 'framer-motion';
 import LoginElements from './LoginElements';
 import SignUpElements from './SignUpElements';
 import Styles from './../styles.module.css';
+import { RegistrationValidate, LoginValidate } from './../Validation';
+import { customAlphabet } from 'nanoid';
+
+const ErrorVariants = {
+  open: {
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+    transitionEnd: {
+      display: 'block',
+    },
+  },
+  close: {
+    opacity: 0,
+    transition: {
+      duration: 0.5,
+    },
+    transitionEnd: {
+      display: 'hidden',
+    },
+  },
+};
 
 const LoginButtonVar = {
   open: {
@@ -66,6 +89,8 @@ const ContVar = {
 
 export default function MobileLogin() {
   const [isLogin, setIsLogin] = useState(true);
+  const [loginError, setLoginError] = useState('');
+  const [registerationError, setRegistrationError] = useState('');
   const [loginData, setLoginData] = useState({
     username: '',
     password: '',
@@ -85,6 +110,29 @@ export default function MobileLogin() {
     setSignupData({ ...signupData, [e.target.name]: e.target.value });
   };
 
+  const onLogin = () => {
+    if (!isLogin) {
+      setIsLogin(true);
+      setRegistrationError('');
+      return;
+    }
+
+    const validate = LoginValidate(loginData);
+    setLoginError(validate.error && validate.error.details[0].message);
+  };
+
+  const onSignup = () => {
+    if (isLogin) {
+      setIsLogin(false);
+      setLoginError('');
+      return;
+    }
+
+    const validate = RegistrationValidate(signupData);
+    setRegistrationError(validate.error && validate.error.details[0].message);
+    console.log(customAlphabet('0123456789shivamSHIVAMbruhBRUH', 10)());
+  };
+
   return (
     <motion.div className={Styles.Mobile}>
       <motion.div className={Styles.Selector}>
@@ -93,7 +141,10 @@ export default function MobileLogin() {
           animate={isLogin ? 'open' : 'close'}
           variants={LoginButtonVar}
           className={Styles.SelectorButton}
-          onClick={() => setIsLogin(true)}>
+          onClick={() => {
+            setIsLogin(true);
+            setRegistrationError('');
+          }}>
           Login
         </motion.button>
         <motion.button
@@ -101,7 +152,10 @@ export default function MobileLogin() {
           animate={!isLogin ? 'open' : 'close'}
           variants={SignupButtonVar}
           className={Styles.SelectorButton}
-          onClick={() => setIsLogin(false)}>
+          onClick={() => {
+            setIsLogin(false);
+            setLoginError('');
+          }}>
           SignUp
         </motion.button>
       </motion.div>
@@ -118,11 +172,12 @@ export default function MobileLogin() {
               className={Styles.MobileElements}
               onDataChange={ChangeLoginData}
             />
-            <motion.button
-              className={Styles.MBtnField}
-              onClick={() => setIsLogin(true)}>
+            <motion.button className={Styles.MBtnField} onClick={onLogin}>
               Login
             </motion.button>
+            <motion.div className={Styles.JoinError} variants={ErrorVariants}>
+              {loginError}
+            </motion.div>
           </motion.div>
         )}
         {!isLogin && (
@@ -137,11 +192,12 @@ export default function MobileLogin() {
               className={Styles.MobileElements}
               onDataChange={ChangeSignupData}
             />
-            <motion.button
-              className={Styles.MBtnField}
-              onClick={() => setIsLogin(false)}>
+            <motion.button className={Styles.MBtnField} onClick={onSignup}>
               SignUp
             </motion.button>
+            <motion.div className={Styles.JoinError} variants={ErrorVariants}>
+              {registerationError}
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

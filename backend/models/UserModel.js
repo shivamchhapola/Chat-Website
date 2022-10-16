@@ -5,6 +5,7 @@ const UserModel = mongoose.Schema(
     username: {
       type: String,
       required: true,
+      unique,
     },
     name: {
       type: String,
@@ -13,6 +14,7 @@ const UserModel = mongoose.Schema(
     email: {
       type: String,
       required: true,
+      unique,
     },
     password: {
       type: String,
@@ -20,7 +22,6 @@ const UserModel = mongoose.Schema(
     },
     pic: {
       type: String,
-      required: true,
       default: 'https://cdn-icons-png.flaticon.com/512/456/456283.png',
     },
   },
