@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { customAlphabet } from 'nanoid';
 import LoginElements from './LoginElements';
 import SignUpElements from './SignUpElements';
 import Styles from './../styles.module.css';
@@ -131,7 +130,6 @@ export default function DesktopLogin() {
 
     const validate = RegistrationValidate(signupData);
     setRegistrationError(validate.error && validate.error.details[0].message);
-    console.log(customAlphabet('0123456789shivamSHIVAMbruhBRUH', 10)());
   };
 
   return (

@@ -17,6 +17,7 @@
     "@fontsource/rubik": "^4.5.11",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
     "joi": "^17.6.3",
     "joi-password-complexity": "^5.1.0",
     "mongoose": "^6.6.1",
