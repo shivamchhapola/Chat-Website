@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import LoginElements from './LoginElements';
 import SignUpElements from './SignUpElements';
-import Styles from './../styles.module.css';
-import { RegistrationValidate, LoginValidate } from './../Validation';
-import { customAlphabet } from 'nanoid';
+import Styles from '../../styles/Join/styles.module.css';
+import {
+  RegistrationValidate,
+  LoginValidate,
+} from '../../utils/Join/Validation';
 
 const ErrorVariants = {
   open: {
@@ -102,14 +104,6 @@ export default function MobileLogin() {
     email: '',
   });
 
-  const ChangeLoginData = (e) => {
-    setLoginData({ ...loginData, [e.target.name]: e.target.value });
-  };
-
-  const ChangeSignupData = (e) => {
-    setSignupData({ ...signupData, [e.target.name]: e.target.value });
-  };
-
   const onLogin = () => {
     if (!isLogin) {
       setIsLogin(true);
@@ -130,7 +124,6 @@ export default function MobileLogin() {
 
     const validate = RegistrationValidate(signupData);
     setRegistrationError(validate.error && validate.error.details[0].message);
-    console.log(customAlphabet('0123456789shivamSHIVAMbruhBRUH', 10)());
   };
 
   return (
@@ -144,6 +137,12 @@ export default function MobileLogin() {
           onClick={() => {
             setIsLogin(true);
             setRegistrationError('');
+            setSignupData({
+              name: '',
+              password: '',
+              confirmPassword: '',
+              email: '',
+            });
           }}>
           Login
         </motion.button>
@@ -155,6 +154,10 @@ export default function MobileLogin() {
           onClick={() => {
             setIsLogin(false);
             setLoginError('');
+            setLoginData({
+              username: '',
+              password: '',
+            });
           }}>
           SignUp
         </motion.button>
@@ -170,12 +173,20 @@ export default function MobileLogin() {
             variants={ContVar}>
             <LoginElements
               className={Styles.MobileElements}
-              onDataChange={ChangeLoginData}
+              data={loginData}
+              setData={setLoginData}
             />
             <motion.button className={Styles.MBtnField} onClick={onLogin}>
               Login
             </motion.button>
-            <motion.div className={Styles.JoinError} variants={ErrorVariants}>
+            <motion.div
+              className={Styles.JoinError}
+              variants={ErrorVariants}
+              style={
+                registerationError === ''
+                  ? { display: 'none' }
+                  : { display: 'block' }
+              }>
               {loginError}
             </motion.div>
           </motion.div>
@@ -190,12 +201,20 @@ export default function MobileLogin() {
             variants={ContVar}>
             <SignUpElements
               className={Styles.MobileElements}
-              onDataChange={ChangeSignupData}
+              data={signupData}
+              setData={setSignupData}
             />
             <motion.button className={Styles.MBtnField} onClick={onSignup}>
               SignUp
             </motion.button>
-            <motion.div className={Styles.JoinError} variants={ErrorVariants}>
+            <motion.div
+              className={Styles.JoinError}
+              variants={ErrorVariants}
+              style={
+                registerationError === ''
+                  ? { display: 'none' }
+                  : { display: 'block' }
+              }>
               {registerationError}
             </motion.div>
           </motion.div>

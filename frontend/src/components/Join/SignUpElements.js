@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Styles from './../styles.module.css';
+import Styles from '../../styles/Join/styles.module.css';
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 
 export default function LoginElements({ className, data, setData }) {

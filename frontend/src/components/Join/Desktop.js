@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import LoginElements from './LoginElements';
 import SignUpElements from './SignUpElements';
-import Styles from './../styles.module.css';
-import { RegistrationValidate, LoginValidate } from './../Validation';
+import Styles from '../../styles/Join/styles.module.css';
+import {
+  RegistrationValidate,
+  LoginValidate,
+} from '../../utils/Join/Validation';
 
 const ConVariants = {
   open: {
@@ -165,7 +168,14 @@ export default function DesktopLogin() {
             variants={ButtonVariants}>
             Login
           </motion.button>
-          <motion.div className={Styles.JoinError} variants={ErrorVariants}>
+          <motion.div
+            className={Styles.JoinError}
+            variants={ErrorVariants}
+            style={
+              registerationError === ''
+                ? { display: 'none' }
+                : { display: 'block' }
+            }>
             {loginError}
           </motion.div>
         </motion.div>
@@ -196,7 +206,14 @@ export default function DesktopLogin() {
             variants={ButtonVariants}>
             SignUp
           </motion.button>
-          <motion.div className={Styles.JoinError} variants={ErrorVariants}>
+          <motion.div
+            className={Styles.JoinError}
+            variants={ErrorVariants}
+            style={
+              registerationError === ''
+                ? { display: 'none' }
+                : { display: 'block' }
+            }>
             {registerationError}
           </motion.div>
         </motion.div>

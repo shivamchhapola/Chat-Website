@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { ConnectDB } from './config/db.js';
 import { joinRouter } from './routes/join.js';
+import { errorHandler, notFound } from './middleware/error.js';
 
 dotenv.config();
 
@@ -15,7 +16,11 @@ app.get('/', (req, res) => {
 });
 
 //User Signup and Login stuff
-app.use(joinRouter);
+app.use('/api', joinRouter);
+
+//Error Handling
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(process.env.PORT || '5000', () => {
   console.log('Server Started on ' + (process.env.PORT || '5000'));

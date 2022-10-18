@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Homepage from './Homepage/Homepage';
-import Join from './Join/Join';
+import Homepage from './pages/Homepage';
+import Join from './pages/Join';
 
 function App() {
   return (

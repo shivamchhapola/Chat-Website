@@ -1,11 +1,11 @@
 import { Heading, Link, Text } from '@chakra-ui/layout';
 import React, { Component } from 'react';
-import Navbar from './Navbar';
+import Navbar from '../components/Homepage/Navbar';
 import { Box, Flex, Button, Image, IconButton } from '@chakra-ui/react';
 import { FaArrowRight, FaInstagram, FaTwitter } from 'react-icons/fa';
-import Svg1 from './Icons/Svg1.svg';
-import TLogo from './Icons/TLogo.png';
-import HeadBack from './Icons/random-shapes.svg';
+import Demo from '../assets/Homepage/demo.svg';
+import TLogo from '../assets/logo_nobackground.png';
+import HeadBack from '../assets/Homepage/headbackground.svg';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -43,10 +43,14 @@ export default class Homepage extends Component {
               day and hang out more often.
             </Text>
             <Box>
-              <Button as={Link} rightIcon={<FaArrowRight />} href="/join" _hover={{
-                textDecoration: "none",
-                backgroundColor: "gray.300",
-              }}>
+              <Button
+                as={Link}
+                rightIcon={<FaArrowRight />}
+                href="/join"
+                _hover={{
+                  textDecoration: 'none',
+                  backgroundColor: 'gray.300',
+                }}>
                 Join Us
               </Button>
             </Box>
@@ -60,7 +64,7 @@ export default class Homepage extends Component {
           justify="center"
           direction={['column', 'column', 'row', 'row']}
           data-aos="fade-up">
-          <Image src={Svg1} w={['80%', '70%', '50%', '60%']} />
+          <Image src={Demo} w={['80%', '70%', '50%', '60%']} />
           <Box padding={['2rem', '3rem', '3rem', '2rem']}>
             <Heading
               fontSize={['1.3rem', '2rem', '2rem', '2.5rem']}
@@ -100,7 +104,7 @@ export default class Homepage extends Component {
               clogging up a group chat.
             </Text>
           </Box>
-          <Image src={Svg1} w={['80%', '70%', '50%', '60%']} />
+          <Image src={Demo} w={['80%', '70%', '50%', '60%']} />
         </Flex>
 
         <Flex
@@ -110,7 +114,7 @@ export default class Homepage extends Component {
           justify="center"
           direction={['column', 'column', 'row', 'row']}
           data-aos="fade-up">
-          <Image src={Svg1} w={['80%', '70%', '50%', '60%']} />
+          <Image src={Demo} w={['80%', '70%', '50%', '60%']} />
           <Box padding={['2rem', '3rem', '3rem', '2rem']}>
             <Heading
               fontSize={['1.3rem', '2rem', '2rem', '2.5rem']}
@@ -154,7 +158,7 @@ export default class Homepage extends Component {
               clogging up a group chat.
             </Text>
           </Box>
-          <Image src={Svg1} w={['80%', '70%', '50%', '60%']} />
+          <Image src={Demo} w={['80%', '70%', '50%', '60%']} />
         </Flex>
 
         <Flex direction="column" h="30vh" data-aos="fade-up">

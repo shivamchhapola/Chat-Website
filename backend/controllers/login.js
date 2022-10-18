@@ -1,5 +1,6 @@
 import expressAsyncHandler from 'express-async-handler';
 import Joi from 'joi';
+import { generateToken } from '../config/jwt.js';
 import User from '../models/UserModel.js';
 
 //Main Login function handled by expressAsyncHandler to catch errors
@@ -24,11 +25,13 @@ const login = expressAsyncHandler(async (req, res) => {
       .status(500)
       .send('Could not find an account with given Username/Email');
 
-  //Password verification
-  if (user && user.password !== password)
-    return res.status(400).send('Incorrect Username/Email or Passoword');
-
-  if (user) return res.status(200).send(user);
+  if (user && user.matchPass(password))
+    return res.status(200).json({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      token: generateToken(user._id),
+    });
 });
 
 export default login;

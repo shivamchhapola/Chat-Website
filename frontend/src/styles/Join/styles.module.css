@@ -29,7 +29,7 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-image: url('./Images/back.svg');
+  background-image: url('../../assets/Join/back.svg');
 }
 
 .Mobile {

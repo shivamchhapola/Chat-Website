@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid'; //Used to generate unique username
 import User from '../models/UserModel.js';
 import Joi from 'joi';
 import JoiPasswordComplexity from 'joi-password-complexity';
+import { generateToken } from '../config/jwt.js';
 
 //Sets requirements for password
 const ComplexityOptions = {
@@ -52,7 +53,13 @@ const signup = expressAsyncHandler(async (req, res) => {
   const user = await User.create(data).catch((err) => {
     return res.status(500).send('Could not create an account: ' + err);
   });
-  if (user) return res.status(200).send(user);
+  if (user)
+    return res.status(200).json({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      token: generateToken(user._id),
+    });
 });
 
 export default signup;

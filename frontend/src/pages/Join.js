@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import WebFont from 'webfontloader';
-import DesktopLogin from './Componenets/DesktopLogin';
-import MobileLogin from './Componenets/MobileLogin';
-import Styles from './styles.module.css'
+import Desktop from '../components/Join/Desktop';
+import Mobile from '../components/Join/Mobile';
+import Styles from '../styles/Join/styles.module.css';
 
 function Join() {
   useEffect(() => {
@@ -17,8 +17,8 @@ function Join() {
   return (
     <AnimatePresence>
       <motion.div className={Styles.Join}>
-        <MobileLogin />
-        <DesktopLogin />
+        <Mobile />
+        <Desktop />
       </motion.div>
     </AnimatePresence>
   );
