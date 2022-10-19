@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import LoginElements from './LoginElements';
 import SignUpElements from './SignUpElements';
 import Styles from '../../styles/Join/styles.module.css';
-import {
-  RegistrationValidate,
-  LoginValidate,
-} from '../../utils/Join/Validation';
+import { JoinContext } from '../../pages/Join';
 
 const ConVariants = {
   open: {
@@ -54,17 +51,11 @@ const ErrorVariants = {
     transition: {
       duration: 0.5,
     },
-    transitionEnd: {
-      display: 'block',
-    },
   },
   close: {
     opacity: 0,
     transition: {
       duration: 0.5,
-    },
-    transitionEnd: {
-      display: 'hidden',
     },
   },
 };
@@ -89,51 +80,16 @@ const ButtonVariants = {
 };
 
 export default function DesktopLogin() {
-  const [isLogin, setIsLogin] = useState(true);
-  const [loginError, setLoginError] = useState('');
-  const [registerationError, setRegistrationError] = useState('');
-  const [loginData, setLoginData] = useState({
-    username: '',
-    password: '',
-  });
-  const [signupData, setSignupData] = useState({
-    name: '',
-    password: '',
-    confirmPassword: '',
-    email: '',
-  });
-
-  const onLogin = () => {
-    if (!isLogin) {
-      setIsLogin(true);
-      setRegistrationError('');
-      setSignupData({
-        name: '',
-        password: '',
-        confirmPassword: '',
-        email: '',
-      });
-      return;
-    }
-
-    const validate = LoginValidate(loginData);
-    setLoginError(validate.error && validate.error.details[0].message);
-  };
-
-  const onSignup = () => {
-    if (isLogin) {
-      setIsLogin(false);
-      setLoginError('');
-      setLoginData({
-        username: '',
-        password: '',
-      });
-      return;
-    }
-
-    const validate = RegistrationValidate(signupData);
-    setRegistrationError(validate.error && validate.error.details[0].message);
-  };
+  const {
+    isLogin,
+    joinError,
+    loginData,
+    setLoginData,
+    signupData,
+    setSignupData,
+    onLogin,
+    onSignup,
+  } = useContext(JoinContext);
 
   return (
     <AnimatePresence>
@@ -172,11 +128,11 @@ export default function DesktopLogin() {
             className={Styles.JoinError}
             variants={ErrorVariants}
             style={
-              registerationError === ''
+              joinError.login === ''
                 ? { display: 'none' }
                 : { display: 'block' }
             }>
-            {loginError}
+            {joinError.login}
           </motion.div>
         </motion.div>
         <motion.div
@@ -210,11 +166,11 @@ export default function DesktopLogin() {
             className={Styles.JoinError}
             variants={ErrorVariants}
             style={
-              registerationError === ''
+              joinError.signup === ''
                 ? { display: 'none' }
                 : { display: 'block' }
             }>
-            {registerationError}
+            {joinError.signup}
           </motion.div>
         </motion.div>
       </motion.div>

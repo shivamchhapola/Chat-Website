@@ -27,8 +27,8 @@ const login = expressAsyncHandler(async (req, res) => {
 
   if (user && user.matchPass(password))
     return res.status(200).json({
-      id: user._id,
       name: user.name,
+      username: user.username,
       email: user.email,
       token: generateToken(user._id),
     });
