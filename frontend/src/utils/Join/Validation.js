@@ -31,9 +31,7 @@ export const RegistrationValidate = (data) => {
 export const LoginValidate = (data) => {
   const schema = Joi.object({
     username: Joi.string().label('Username/Email').required(),
-    password: JoiPasswordComplexity(ComplexityOptions)
-      .label('Password')
-      .required(),
+    password: Joi.string().label('Password').required(),
   });
   return schema.validate(data);
 };

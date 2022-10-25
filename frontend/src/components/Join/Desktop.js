@@ -11,6 +11,7 @@ const ConVariants = {
     backgroundColor: '#E2E8F0',
     transition: {
       duration: 0.5,
+      ease: 'easeInOut',
     },
   },
   close: {
@@ -18,6 +19,7 @@ const ConVariants = {
     backgroundColor: '#2D3748',
     transition: {
       duration: 0.5,
+      ease: 'easeInOut',
     },
   },
 };

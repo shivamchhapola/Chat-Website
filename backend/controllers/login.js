@@ -25,13 +25,15 @@ const login = expressAsyncHandler(async (req, res) => {
       .status(500)
       .send('Could not find an account with given Username/Email');
 
-  if (user && user.matchPass(password))
-    return res.status(200).json({
-      name: user.name,
-      username: user.username,
-      email: user.email,
-      token: generateToken(user._id),
-    });
+  const match = await user.matchPass(password);
+  return match
+    ? res.status(200).json({
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        token: generateToken(user._id),
+      })
+    : res.status(400).send('Incorrect Password or Username/Email');
 });
 
 export default login;

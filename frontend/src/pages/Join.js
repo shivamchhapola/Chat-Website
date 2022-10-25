@@ -4,12 +4,15 @@ import WebFont from 'webfontloader';
 import Desktop from '../components/Join/Desktop';
 import Mobile from '../components/Join/Mobile';
 import Styles from '../styles/Join/styles.module.css';
-import { LoginValidate } from '../utils/Join/Validation';
+import { LoginValidate, RegistrationValidate } from '../utils/Join/Validation';
 import { postdata } from '../utils/Join/Postdata';
+import { useNavigate } from 'react-router';
 
 export const JoinContext = React.createContext();
 
 function Join() {
+  const navigate = useNavigate();
+
   const [isLogin, setIsLogin] = useState(true);
   const [joinError, setJoinError] = useState({
     login: '',
@@ -47,10 +50,19 @@ function Join() {
     const validate = LoginValidate(loginData);
     validate.error
       ? setJoinError({ ...joinError, login: validate.error.details[0].message })
-      : await postdata('login', loginData).then((res) => {
-          setUser(res.data);
-          console.log(res.data);
-        });
+      : await postdata('login', loginData)
+          .then((res) => {
+            setUser(res.data);
+            localStorage.setItem('user', JSON.stringify(res.data));
+            console.log(JSON.parse(localStorage.getItem('user')));
+            navigate('/chat');
+          })
+          .catch((err) =>
+            setJoinError({
+              ...joinError,
+              login: err.response.data,
+            })
+          );
   };
 
   const onSignup = async () => {
@@ -63,16 +75,25 @@ function Join() {
       });
       return;
     }
-    const validate = LoginValidate(signupData);
+    const validate = RegistrationValidate(signupData);
     validate.error
       ? setJoinError({
           ...joinError,
           signup: validate.error.details[0].message,
         })
-      : await postdata('signup', signupData).then((res) => {
-          setUser(res.data);
-          console.log(res.data);
-        });
+      : await postdata('signup', signupData)
+          .then((res) => {
+            setUser(res.data);
+            localStorage.setItem('user', JSON.stringify(res.data));
+            console.log(JSON.parse(localStorage.getItem('user')));
+            navigate('/chat');
+          })
+          .catch((err) =>
+            setJoinError({
+              ...joinError,
+              signup: err.response.data,
+            })
+          );
   };
 
   const contextValue = {
