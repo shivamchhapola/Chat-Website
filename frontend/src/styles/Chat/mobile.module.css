@@ -1,0 +1,9 @@
+.Mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .Mobile {
+    display: grid;
+  }
+}

@@ -1,0 +1,226 @@
+/* || General styles */
+header {
+  grid-area: header;
+  font-size: small;
+  text-align: right;
+  font-family: 'Fira Sans Condensed';
+  font-weight: bold;
+  padding-right: 0.5rem;
+  color: #a0aec0;
+}
+
+hr {
+  border: 1px solid #1a202c;
+}
+
+main {
+  grid-area: main;
+  background-color: #2d3748;
+  border-radius: 0.7rem 0 0 0;
+}
+
+/* || Layout*/
+.Desktop {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-areas:
+    'header header'
+    'menu main';
+  grid-template-rows: 1.2rem auto;
+  grid-template-columns: 2.5rem auto;
+}
+
+.GroupChat {
+  display: flex;
+  height: 100%;
+}
+
+.GCList {
+  width: 25%;
+}
+
+.GCInfo {
+  background-color: #333f56;
+  width: 25%;
+}
+
+.ChatArea {
+  width: 50%;
+}
+
+/* || Utils*/
+.Menu {
+  grid-area: menu;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.SecTitle {
+  height: 2.5rem;
+  width: 100%;
+  color: #a0aec0;
+  text-align: left;
+  padding-left: 1rem;
+  font-family: 'Roboto';
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.FlexColumns {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* || Profile Selector Component for Groups and DMs*/
+.ProfileComponent {
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.ProfileIcon {
+  height: 2.4rem;
+  width: 2.4rem;
+  margin-left: 0.5rem;
+  background-color: #a0aec0;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.ProfileInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+}
+
+.ProfileName {
+  height: 55%;
+  text-align: left;
+  color: #e2e8f0;
+  font-family: 'Noto Sans';
+  font-weight: 500;
+  padding-top: 0.35rem;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ProfileDesc {
+  text-align: left;
+  color: #cbd5e0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.7rem;
+  font-family: 'Noto Sans';
+  font-weight: 400;
+}
+
+/* || GC Info menu*/
+.GCInfoItemContainer {
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.GCInfoItemTitle {
+  width: 95%;
+  height: 85%;
+  text-align: left;
+  font-family: 'Noto Sans';
+  color: #e2e8f0;
+  font-weight: 500;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 0.3rem;
+  padding-left: 0.5rem;
+}
+
+/* || Message*/
+.Message {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  margin-top: 0.5rem;
+  margin-bottom: 0.2rem;
+  align-items: flex-start;
+}
+
+.MessageProfilePic {
+  height: 2.4rem;
+  width: 2.4rem;
+  margin-left: 0.5rem;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.MessageContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.MessageContentTop {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: flex-start;
+}
+
+.MessageContentTopName {
+  text-align: left;
+  color: #e2e8f0;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+  font-size: 0.9rem;
+  font-family: 'Noto Sans';
+  font-weight: 500;
+}
+
+.MessageContentTopTime {
+  text-align: left;
+  color: #687280;
+  font-size: 0.6rem;
+  line-height: 1.1rem;
+}
+
+.MessageContentBottom {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: flex-start;
+}
+
+.MessageContentBottomText {
+  text-align: left;
+  color: #cbd5e0;
+  margin-left: 0.3rem;
+  font-size: 0.78rem;
+  word-break: break-word;
+  font-family: 'Noto Sans';
+}
+
+@media only screen and (max-width: 600px) {
+  .Desktop {
+    display: none;
+  }
+}
