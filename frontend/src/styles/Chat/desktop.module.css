@@ -85,6 +85,11 @@ main {
   display: flex;
   flex-direction: row;
   align-items: center;
+  background-color: #2d3748;
+}
+
+.ProfileComponent:hover {
+  background-color: #323e52;
 }
 
 .ProfileIcon {

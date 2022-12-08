@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ProfileComponent from '../ProfileComponent';
 import MessageComponent from '../MessageComponent';
+import GroupChatMenu from './GroupChatMenu';
 
 //Demo
 import Groups from '../../../assets/Demo/GroupListDemo';
@@ -21,10 +22,10 @@ export default function GroupChat({ Styles }) {
               <ProfileComponent
                 key={group._id}
                 Styles={Styles}
-                GCName={group.name}
-                GCDesc={group.desc}
-                GCImage={group.img}
-                BGColor={selectedGroup === group._id ? '#1E283D' : '#2d3748'}
+                Name={group.name}
+                Desc={group.desc}
+                Image={group.img}
+                Selected={selectedGroup === group._id}
                 onClick={() => setSelectedGroup(group._id)}
               />
             );
@@ -36,26 +37,7 @@ export default function GroupChat({ Styles }) {
           {'> ' + Groups.find((e) => e._id === selectedGroup).name}
         </div>
         <hr />
-        <div className={Styles.FlexColumns}>
-          <div className={Styles.GCInfoItemContainer}>
-            <div className={Styles.GCInfoItemTitle}>· Total Members: 69</div>
-          </div>
-          <div className={Styles.GCInfoItemContainer}>
-            <div className={Styles.GCInfoItemTitle}>· Members</div>
-          </div>
-          <div className={Styles.GCInfoItemContainer}>
-            <div className={Styles.GCInfoItemTitle}>· Settings</div>
-          </div>
-          <div className={Styles.GCInfoItemContainer}>
-            <div className={Styles.GCInfoItemTitle}>· Invite Perople</div>
-          </div>
-          <div className={Styles.GCInfoItemContainer}>
-            <div className={Styles.GCInfoItemTitle}>· Create Chatroom</div>
-          </div>
-          <div className={Styles.GCInfoItemContainer}>
-            <div className={Styles.GCInfoItemTitle}>· Chatrooms</div>
-          </div>
-        </div>
+        <GroupChatMenu Styles={Styles} />
       </div>
       <div className={Styles.ChatArea}>
         <div className={Styles.SecTitle}>/ general</div>

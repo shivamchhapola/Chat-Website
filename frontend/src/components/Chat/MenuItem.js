@@ -1,21 +1,18 @@
 import React from 'react';
+import Styles from './../../styles/Chat/main.module.css';
 
-const MenuContainerStyle = {
-  width: '100%',
-  marginTop: '0.5rem',
-  overflow: 'hidden',
-  padding: '17%',
-};
-
-function MenuItem({ Image, Color, onClick }) {
+function MenuItem({ Image, Selected, onClick }) {
   return (
-    <button style={MenuContainerStyle} onClick={onClick}>
+    <button className={Styles.MenuItemContainer} onClick={onClick}>
       <Image
-        style={{
-          height: '100%',
-          width: '100%',
-          color: Color,
-        }}
+        className={Styles.MenuItemImage}
+        style={
+          Selected
+            ? {
+                color: '#58bfff',
+              }
+            : {}
+        }
       />
     </button>
   );
@@ -23,8 +20,9 @@ function MenuItem({ Image, Color, onClick }) {
 
 function MenuItemImage({ Image, Color, onClick }) {
   return (
-    <button style={MenuContainerStyle} onClick={onClick}>
+    <button className={Styles.MenuItemContainer} onClick={onClick}>
       <img
+        className={Styles.MenuItemImage}
         src={Image}
         alt="Profile"
         style={{

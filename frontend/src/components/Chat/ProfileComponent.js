@@ -2,23 +2,23 @@ import React from 'react';
 
 export default function ProfileComponent({
   Styles,
-  GCImage,
-  GCName,
-  GCDesc,
-  BGColor,
+  Image,
+  Name,
+  Desc,
+  Selected,
   onClick,
 }) {
   return (
     <button
       onClick={onClick}
       className={Styles.ProfileComponent}
-      style={{ backgroundColor: BGColor }}>
+      style={Selected ? { backgroundColor: '#1E283D' } : {}}>
       <div className={Styles.ProfileIcon}>
-        <img src={GCImage} alt="icon" />
+        <img src={Image} alt="icon" />
       </div>
       <div className={Styles.ProfileInfo}>
-        <div className={Styles.ProfileName}>{GCName}</div>
-        <div className={Styles.ProfileDesc}>{GCDesc}</div>
+        <div className={Styles.ProfileName}>{Name}</div>
+        <div className={Styles.ProfileDesc}>{Desc}</div>
       </div>
     </button>
   );
