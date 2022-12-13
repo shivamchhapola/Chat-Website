@@ -27,7 +27,7 @@ export default function GroupChatMenu({ Styles, SelectedGroup }) {
       <div
         className={Styles.FlexColumns}
         style={{
-          height: '80%',
+          height: '85%',
         }}>
         <div className={Styles.GCInfoItemContainer}>
           <span>
@@ -95,12 +95,6 @@ export default function GroupChatMenu({ Styles, SelectedGroup }) {
               </div>
             );
           })}
-          <div className={Styles.GCInfoItemContainer}>
-            <span>
-              <MdPersonAddAlt1 size="1.3rem" />
-            </span>
-            <div className={Styles.GCInfoItemTitle}>Invite People</div>
-          </div>
         </div>
       </div>
     </>
