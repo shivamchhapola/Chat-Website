@@ -8,14 +8,7 @@ import Groups from '../../../assets/Demo/GroupListDemo';
 import Messages from '../../../assets/Demo/MessageListDemo';
 
 export default function GroupChat({ Styles }) {
-  const [selectedGroup, setSelectedGroup] = useState({
-    _id: 'echidna',
-    name: 'Echidna Sama',
-    desc: 'Group of Degenrates and CBT lovers',
-    img: '',
-    members: ['vashal', 'shivam', 'kunj', 'zeemon', 'billa', 'rudra', 'barbox'],
-    chatrooms: ['general', 'memes', 'hentai', 'anime', 'arbaz ka dabha', 'CP'],
-  });
+  const [selectedGroup, setSelectedGroup] = useState(Groups[0]);
   //const [selectedInfo, setSelectedInfo] = useState('chatrooms');
 
   return (
