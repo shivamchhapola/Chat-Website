@@ -14,9 +14,10 @@
 .MenuItemImage {
   height: 100%;
   width: 100%;
-  color: #a0aec0;
+  transition: all 0.2s ease-in-out;
 }
 
 .MenuItemImage:hover {
   color: #fff;
+  transform: scale(1.1);
 }

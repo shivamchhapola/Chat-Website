@@ -38,22 +38,22 @@ export default function Desktop() {
       <div className={Styles.Menu}>
         <MenuItem
           Image={selectedMenu === 'dm' ? RiChat2Fill : RiChat2Line}
-          Color={selectedMenu === 'dm' ? '#58bfff' : '#A0AEC0'}
+          Color={selectedMenu === 'dm' ? '#e2e8f0' : '#A0AEC0'}
           onClick={() => setSelectedMenu('dm')}
         />
         <MenuItem
           Image={selectedMenu === 'gc' ? MdGroup : MdOutlineGroup}
-          Color={selectedMenu === 'gc' ? '#58bfff' : '#A0AEC0'}
+          Color={selectedMenu === 'gc' ? '#e2e8f0' : '#A0AEC0'}
           onClick={() => setSelectedMenu('gc')}
         />
         <MenuItem
           Image={selectedMenu === 'search' ? RiSearch2Fill : RiSearch2Line}
-          Color={selectedMenu === 'search' ? '#58bfff' : '#A0AEC0'}
+          Color={selectedMenu === 'search' ? '#e2e8f0' : '#A0AEC0'}
           onClick={() => setSelectedMenu('search')}
         />
         <MenuItemImage
           Image={ProfilePic}
-          Color={selectedMenu === 'profile' ? '#58bfff' : 'rgba(0,0,0,0)'}
+          Color={selectedMenu === 'profile' ? '#e2e8f0' : 'rgba(0,0,0,0)'}
           onClick={() => setSelectedMenu('profile')}
         />
       </div>

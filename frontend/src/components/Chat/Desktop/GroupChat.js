@@ -8,39 +8,58 @@ import Groups from '../../../assets/Demo/GroupListDemo';
 import Messages from '../../../assets/Demo/MessageListDemo';
 
 export default function GroupChat({ Styles }) {
-  const [selectedGroup, setSelectedGroup] = useState('vac');
+  const [selectedGroup, setSelectedGroup] = useState({
+    _id: 'echidna',
+    name: 'Echidna Sama',
+    desc: 'Group of Degenrates and CBT lovers',
+    img: '',
+    members: ['vashal', 'shivam', 'kunj', 'zeemon', 'billa', 'rudra', 'barbox'],
+    chatrooms: ['general', 'memes', 'hentai', 'anime', 'arbaz ka dabha', 'CP'],
+  });
   //const [selectedInfo, setSelectedInfo] = useState('chatrooms');
 
   return (
     <div className={Styles.GroupChat}>
       <div className={Styles.GCList}>
-        <div className={Styles.SecTitle}>· Your Groups</div>
+        <div className={Styles.SecTitle}>
+          <span
+            className={Styles.TextOverflow}
+            style={{
+              paddingLeft: '0.4rem',
+            }}>
+            Your Groups
+          </span>
+        </div>
         <hr />
         <div className={Styles.FlexColumns}>
           {Groups.map((group) => {
             return (
               <ProfileComponent
-                key={group._id}
                 Styles={Styles}
+                key={group._id}
                 Name={group.name}
                 Desc={group.desc}
                 Image={group.img}
-                Selected={selectedGroup === group._id}
-                onClick={() => setSelectedGroup(group._id)}
+                Selected={selectedGroup._id === group._id}
+                onClick={() => setSelectedGroup(group)}
               />
             );
           })}
         </div>
       </div>
       <div className={Styles.GCInfo}>
-        <div className={Styles.SecTitle}>
-          {'> ' + Groups.find((e) => e._id === selectedGroup).name}
-        </div>
-        <hr />
-        <GroupChatMenu Styles={Styles} />
+        <GroupChatMenu Styles={Styles} SelectedGroup={selectedGroup} />
       </div>
       <div className={Styles.ChatArea}>
-        <div className={Styles.SecTitle}>/ general</div>
+        <div className={Styles.SecTitle}>
+          <span
+            className={Styles.TextOverflow}
+            style={{
+              paddingLeft: '0.4rem',
+            }}>
+            / test
+          </span>
+        </div>
         <hr />
         <div className={Styles.FlexColumns}>
           {Messages.map((message) => {

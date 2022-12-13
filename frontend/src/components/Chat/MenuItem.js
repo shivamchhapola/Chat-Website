@@ -1,18 +1,14 @@
 import React from 'react';
 import Styles from './../../styles/Chat/main.module.css';
 
-function MenuItem({ Image, Selected, onClick }) {
+function MenuItem({ Image, Selected, onClick, Color }) {
   return (
     <button className={Styles.MenuItemContainer} onClick={onClick}>
       <Image
+        style={{
+          color: Color,
+        }}
         className={Styles.MenuItemImage}
-        style={
-          Selected
-            ? {
-                color: '#58bfff',
-              }
-            : {}
-        }
       />
     </button>
   );
