@@ -7,7 +7,7 @@ const Messages = [
   {
     _id: 'barbox',
     name: 'Barbox',
-    message: { text: 'Mai gay hu' },
+    message: { text: 'Hi' },
     profilepic: EchidnaImg,
     time: '11/05/2022 8:16PM',
     SendByMe: false,
@@ -15,7 +15,7 @@ const Messages = [
   {
     _id: 'bunj',
     name: 'Bunj',
-    message: { text: 'group se tereko bahar nikal raha hu' },
+    message: { text: 'HI' },
     profilepic: PikaImg,
     time: '11/05/2022 8:17PM',
     SendByMe: false,
@@ -31,7 +31,7 @@ const Messages = [
   {
     _id: 'vishal',
     name: 'Vishal',
-    message: { text: 'Full suppot' },
+    message: { text: 'Hey' },
     profilepic: CSMImg,
     time: '11/05/2022 8:18PM',
     SendByMe: false,
