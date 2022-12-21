@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Desktop from '../components/Chat/Desktop/Desktop';
-import Mobile from './../components/Chat/Mobile';
+import Desktop from './../components/Chat/Desktop/Desktop';
+import Mobile from './../components/Chat/Mobile/Mobile';
 import Styles from './../styles/Chat/main.module.css';
 
 export default function Chat() {
@@ -12,8 +12,8 @@ export default function Chat() {
 
   return (
     <div className={Styles.Chat}>
-      <Desktop />
-      <Mobile />
+      <Desktop user={user} />
+      <Mobile user={user} />
     </div>
   );
 }

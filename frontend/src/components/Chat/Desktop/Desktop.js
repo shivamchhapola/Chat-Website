@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Styles from './../../../styles/Chat/desktop.module.css';
-import GroupChat from './GroupChat';
+import GroupChat from './GroupChat/GroupChat';
 import { MenuItem, MenuItemImage } from '../MenuItem';
 import WebFont from 'webfontloader';
 import { MdGroup, MdOutlineGroup } from 'react-icons/md';
@@ -57,9 +57,7 @@ export default function Desktop() {
           onClick={() => setSelectedMenu('profile')}
         />
       </div>
-      <main>
-        <GroupChat Styles={Styles} />
-      </main>
+      <GroupChat Styles={Styles} />
     </div>
   );
 }

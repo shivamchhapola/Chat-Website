@@ -1,6 +1,8 @@
 import React from 'react';
 import { RiSettings3Fill } from 'react-icons/ri';
 import { GiNestedHexagons } from 'react-icons/gi';
+import GCStyles from './../../../../styles/Chat/groupchat.module.css';
+import Styles from './../../../../styles/Chat/desktop.module.css';
 import {
   MdGroup,
   MdPersonAddAlt1,
@@ -8,10 +10,10 @@ import {
   MdAdd,
 } from 'react-icons/md';
 
-export default function GroupChatMenu({ Styles, SelectedGroup }) {
+export default function GroupChatMenu({ selectedGroup }) {
   return (
-    <>
-      <div className={Styles.SecTitle}>
+    <div className={GCStyles.GCInfo}>
+      <div className={Styles.SectionTitle}>
         <GiNestedHexagons style={{ color: '#a0aec0' }} />
         <span
           className={Styles.TextOverflow}
@@ -19,9 +21,12 @@ export default function GroupChatMenu({ Styles, SelectedGroup }) {
             width: '75%',
             paddingLeft: '0.3rem',
           }}>
-          {SelectedGroup.name}
+          {selectedGroup.name}
         </span>
-        <RiSettings3Fill className={Styles.GCMenuIcons} size="1.2rem" />
+        <RiSettings3Fill
+          className={Styles.SpinningSectionIcons}
+          size="1.2rem"
+        />
       </div>
       <hr />
       <div
@@ -29,41 +34,41 @@ export default function GroupChatMenu({ Styles, SelectedGroup }) {
         style={{
           height: '85%',
         }}>
-        <div className={Styles.GCInfoItemContainer}>
+        <div className={GCStyles.GCInfoItemContainer}>
           <span>
             <MdGroup size="1.3rem" />
           </span>
-          <div className={Styles.GCInfoItemTitle}>
-            Total Members: {SelectedGroup.members.length}
+          <div className={GCStyles.GCInfoItemTitle}>
+            Total Members: {selectedGroup.members.length}
           </div>
         </div>
-        <div className={Styles.GCInfoItemContainer}>
+        <div className={GCStyles.GCInfoItemContainer}>
           <span>
             <MdPersonAddAlt1 size="1.3rem" />
           </span>
-          <div className={Styles.GCInfoItemTitle}>Invite People</div>
+          <div className={GCStyles.GCInfoItemTitle}>Invite People</div>
         </div>
         <div
-          className={Styles.GCInfoItemContainer}
+          className={GCStyles.GCInfoItemContainer}
           style={{
             paddingTop: '1rem',
             position: 'relative',
           }}>
           <div
-            className={Styles.GCInfoItemTitle}
+            className={GCStyles.GCInfoItemTitle}
             style={{
               fontSize: '0.85rem',
               color: '#a0aec0',
             }}>
             Chatrooms
           </div>
-          <span className={Styles.GCMenuIcons}>
+          <span className={GCStyles.SpinningSectionIcons}>
             <MdAdd size="1.2rem" />
           </span>
         </div>
-        <div className={Styles.GCInfoCR}>
+        <div className={GCStyles.GCInfoCR}>
           <div
-            className={Styles.GCInfoCRContainer}
+            className={GCStyles.GCInfoCRContainer}
             style={{
               backgroundColor: '#1E283D',
               borderRadius: '0.3rem',
@@ -75,21 +80,21 @@ export default function GroupChatMenu({ Styles, SelectedGroup }) {
               <MdSubdirectoryArrowRight size="1.2rem" />
             </span>
             <div
-              className={Styles.GCInfoCRTitle}
+              className={GCStyles.GCInfoCRTitle}
               style={{
                 color: '#e2e8f0',
               }}>
               test
             </div>
           </div>
-          {SelectedGroup.chatrooms.map((cr, i) => {
+          {selectedGroup.chatrooms.map((cr, i) => {
             return (
-              <div className={Styles.GCInfoCRContainer} key={i}>
+              <div className={GCStyles.GCInfoCRContainer} key={i}>
                 <span>
                   <MdSubdirectoryArrowRight size="1.2rem" />
                 </span>
                 <div
-                  className={`${Styles.GCInfoCRTitle} ${Styles.TextOverflow}`}>
+                  className={`${GCStyles.GCInfoCRTitle} ${Styles.TextOverflow}`}>
                   {cr}
                 </div>
               </div>
@@ -97,6 +102,6 @@ export default function GroupChatMenu({ Styles, SelectedGroup }) {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,0 +1,92 @@
+/* ||Sections */
+.GCList {
+  width: 25%;
+}
+
+.GCInfo {
+  background-color: #333f56;
+  width: 25%;
+}
+
+.GCChat {
+  width: 50%;
+}
+
+/* || GC Info menu*/
+.GCInfoItemContainer {
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 1rem;
+  color: #a0aec0;
+}
+
+.GCInfoItemTitle {
+  flex: 1;
+  height: 85%;
+  font-family: 'Noto Sans';
+  color: #a0aec0;
+  font-weight: 500;
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 0.3rem;
+  padding-left: 0.5rem;
+}
+
+.GCInfoCRContainer {
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 2.5rem;
+  color: #a0aec0;
+  transition: all 0.2s ease-in-out;
+}
+
+.GCInfoCRTitle {
+  flex: 1;
+  height: 85%;
+  font-family: 'Noto Sans';
+  color: #a0aec0;
+  font-weight: 500;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 0.3rem;
+  padding-left: 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.GCInfoCRContainer:hover,
+.GCInfoCRTitle:hover {
+  color: #e2e8f0;
+  transform: scale(1.02);
+}
+
+.GCInfoCR {
+  padding: 0.2rem;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-color: #242c3a #323e52;
+  scrollbar-width: thin;
+}
+
+.GCInfoCR::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+.GCInfoCR::-webkit-scrollbar-thumb {
+  background: #242c3a;
+  border-radius: 0.25rem;
+}
