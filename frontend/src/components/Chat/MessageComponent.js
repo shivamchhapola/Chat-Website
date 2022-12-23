@@ -1,4 +1,5 @@
 import React from 'react';
+import TransparentImage from './../../assets/Images/transparent.png';
 
 export default function MessageComponent({
   Styles,
@@ -30,7 +31,7 @@ export default function MessageComponent({
               }
             : {}
         }>
-        <img alt="profile pic" src={ProfileImg} />
+        <img alt="profile pic" src={ProfileImg || TransparentImage} />
       </div>
       <div className={Styles.MessageContent}>
         <div

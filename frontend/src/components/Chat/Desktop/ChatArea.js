@@ -1,6 +1,11 @@
 import React from 'react';
 import MessageComponent from '../MessageComponent';
 import Styles from './../../../styles/Chat/desktop.module.css';
+import {
+  BsArrowRightCircleFill,
+  BsPaperclip,
+  BsEmojiSmile,
+} from 'react-icons/bs';
 
 export default function ChatArea({ messages, layoutStyle }) {
   return (
@@ -16,10 +21,10 @@ export default function ChatArea({ messages, layoutStyle }) {
       </div>
       <hr />
       <div className={`${Styles.FlexColumns} ${Styles.ChatAreaScrollable}`}>
-        {messages.map((message) => {
+        {messages.map((message, i) => {
           return (
             <MessageComponent
-              key={message._id}
+              key={i}
               Styles={Styles}
               Name={message.name}
               ProfileImg={message.profilepic}
@@ -29,6 +34,37 @@ export default function ChatArea({ messages, layoutStyle }) {
             />
           );
         })}
+        <MessageComponent
+          Styles={Styles}
+          Name=""
+          ProfileImg=""
+          Message=""
+          Time=""
+          SendByMe={false}
+        />
+      </div>
+      <div className={Styles.EnterMessage}>
+        <BsEmojiSmile
+          style={{
+            left: '1.15rem',
+          }}
+          className={Styles.EnterMessageButton}
+          size="1.35rem"
+        />
+        <input placeholder="Enter Message...." type="Text" />
+        <BsPaperclip
+          style={{
+            right: '3.3rem',
+            '--rot': '45deg',
+          }}
+          className={Styles.EnterMessageButton}
+          size="1.5rem"
+        />
+        <BsArrowRightCircleFill
+          style={{ right: '1.15rem' }}
+          className={Styles.EnterMessageButton}
+          size="1.5rem"
+        />
       </div>
     </div>
   );

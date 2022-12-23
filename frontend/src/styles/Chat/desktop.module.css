@@ -1,3 +1,6 @@
+:root {
+}
+
 /* || Layout */
 .Desktop {
   height: 100%;
@@ -65,9 +68,10 @@ hr {
 }
 
 .SpinningSectionIcons {
+  --posRight: -0.6rem;
   color: #a0aec0;
-  position: absolute;
-  right: 0.75rem;
+  position: relative;
+  right: var(--posRight);
   transition: all 0.2s ease-in-out;
 }
 
@@ -154,7 +158,7 @@ hr {
 
 /* || Message*/
 .ChatAreaScrollable {
-  height: 80vh;
+  height: 85vh;
   overflow-y: auto;
   scrollbar-color: #242c3a #323e52;
   scrollbar-width: thin;
@@ -230,6 +234,39 @@ hr {
   font-size: 0.78rem;
   word-break: break-word;
   font-family: 'Noto Sans';
+}
+
+.EnterMessage {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  bottom: 1.5rem;
+  width: 100%;
+  padding: 0 0.5rem 0 0.5rem;
+  height: 2.65rem;
+  align-items: center;
+}
+
+.EnterMessage > input {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  padding: 0 5rem 0 2.7rem;
+  outline: none;
+  background-color: #242c3a;
+  color: #cbd5e0;
+}
+
+.EnterMessageButton {
+  position: absolute;
+  color: #a0aec0;
+  transition: all 0.2s ease-in-out;
+}
+
+.EnterMessageButton:hover {
+  --rot: 360deg;
+  color: #cbd5e0;
+  transform: rotate(var(--rot));
 }
 
 @media only screen and (max-width: 600px) {

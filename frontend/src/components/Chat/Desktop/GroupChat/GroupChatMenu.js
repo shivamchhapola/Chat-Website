@@ -51,19 +51,19 @@ export default function GroupChatMenu({ selectedGroup }) {
         <div
           className={GCStyles.GCInfoItemContainer}
           style={{
-            paddingTop: '1rem',
-            position: 'relative',
+            padding: '1rem 0.5rem 0 1.5rem',
           }}>
           <div
             className={GCStyles.GCInfoItemTitle}
             style={{
-              fontSize: '0.85rem',
               color: '#a0aec0',
             }}>
             Chatrooms
           </div>
-          <span className={GCStyles.SpinningSectionIcons}>
-            <MdAdd size="1.2rem" />
+          <span
+            style={{ '--posRight': '0.25rem' }}
+            className={Styles.SpinningSectionIcons}>
+            <MdAdd size="1.35rem" />
           </span>
         </div>
         <div className={GCStyles.GCInfoCR}>

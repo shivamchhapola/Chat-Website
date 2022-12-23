@@ -1,15 +1,24 @@
 /* ||Sections */
 .GCList {
   width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .GCInfo {
   background-color: #333f56;
   width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .GCChat {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 /* || GC Info menu*/
