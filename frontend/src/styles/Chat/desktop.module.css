@@ -69,6 +69,7 @@ hr {
 
 .SpinningSectionIcons {
   --posRight: -0.6rem;
+  --iconRot: 90deg;
   color: #a0aec0;
   position: relative;
   right: var(--posRight);
@@ -77,7 +78,7 @@ hr {
 
 .SpinningSectionIcons:hover {
   color: #cbd5e0;
-  transform: rotate(90deg) scale(1.1);
+  transform: rotate(var(--iconRot)) scale(1.1);
 }
 
 /* || Profile Selector Component for Groups and DMs*/
@@ -267,6 +268,52 @@ hr {
   --rot: 360deg;
   color: #cbd5e0;
   transform: rotate(var(--rot));
+}
+
+.EmojiPicker {
+  display: block;
+  position: absolute;
+  bottom: 3rem;
+}
+
+.EmojiPicker :global .EmojiPickerReact {
+  --epr-emoji-size: 1.3rem;
+  --epr-category-navigation-button-size: 1.7rem;
+  --epr-category-label-height: 1.7rem;
+  font-size: small;
+}
+
+.SettingsOverlay {
+  z-index: 1;
+  background-color: #1a202c;
+  display: block;
+  position: absolute;
+  top: 8vh;
+  left: 15vw;
+  width: 10rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.SettingsOverlayItemContainer {
+  display: flex;
+  min-height: 2rem;
+  text-align: left;
+  justify-content: flex-start;
+  align-items: center;
+  color: #a0aec0;
+}
+
+.SettingsOverlayItemContainer:hover {
+  color: #e2e8f0;
+  transform: rotate(var(--rot));
+}
+
+.SettingsOverlayItemContainer > span {
+  width: 75%;
+  --rot: 0;
 }
 
 @media only screen and (max-width: 600px) {

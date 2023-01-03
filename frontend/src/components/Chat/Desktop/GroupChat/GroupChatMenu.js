@@ -1,6 +1,5 @@
 import React from 'react';
 import { RiSettings3Fill } from 'react-icons/ri';
-import { GiNestedHexagons } from 'react-icons/gi';
 import GCStyles from './../../../../styles/Chat/groupchat.module.css';
 import Styles from './../../../../styles/Chat/desktop.module.css';
 import {
@@ -14,16 +13,17 @@ export default function GroupChatMenu({ selectedGroup }) {
   return (
     <div className={GCStyles.GCInfo}>
       <div className={Styles.SectionTitle}>
-        <GiNestedHexagons style={{ color: '#a0aec0' }} />
         <span
           className={Styles.TextOverflow}
           style={{
-            width: '75%',
-            paddingLeft: '0.3rem',
+            width: '80%',
           }}>
           {selectedGroup.name}
         </span>
         <RiSettings3Fill
+          style={{
+            left: '0.85rem',
+          }}
           className={Styles.SpinningSectionIcons}
           size="1.2rem"
         />

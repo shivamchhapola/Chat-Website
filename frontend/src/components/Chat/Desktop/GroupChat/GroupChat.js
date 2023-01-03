@@ -15,10 +15,12 @@ export default function GroupChat({ Styles }) {
   return (
     <div className={Styles.MainContent}>
       <GroupChatList
-        selectedGroup={selectedGroup}
-        setSelectedGroup={setSelectedGroup}
+        selectedChat={selectedGroup}
+        setSelectedChat={setSelectedGroup}
         chats={Groups}
         layoutStyle={GCStyles.GCList}
+        title="Your Groups"
+        isGC={true}
       />
       <GroupChatMenu selectedGroup={selectedGroup} />
       <GroupChatArea messages={Messages} layoutStyle={GCStyles.GCChat} />
