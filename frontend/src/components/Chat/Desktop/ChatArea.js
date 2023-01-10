@@ -9,8 +9,6 @@ import {
 } from 'react-icons/bs';
 
 export default function ChatArea({ messages, layoutStyle }) {
-  const [showEmoji, setShowEmoji] = useState(false);
-
   return (
     <div className={layoutStyle}>
       <div className={Styles.SectionTitle}>
@@ -46,51 +44,70 @@ export default function ChatArea({ messages, layoutStyle }) {
           SendByMe={false}
         />
       </div>
-      <div className={Styles.EnterMessage}>
-        {showEmoji && (
-          <div className={Styles.EmojiPicker || ''}>
-            <EmojiPicker
-              theme={Theme.DARK}
-              width="25rem"
-              height="20rem"
-              previewConfig={{
-                showPreview: false,
-              }}
-            />
-          </div>
-        )}
-        <BsEmojiSmile
-          style={
-            showEmoji
-              ? {
-                  left: '1.15rem',
-                  color: '#cbd5e0',
-                }
-              : {
-                  left: '1.15rem',
-                }
-          }
-          className={Styles.EnterMessageButton}
-          size="1.35rem"
-          onClick={() => {
-            setShowEmoji(!showEmoji);
-          }}
-        />
-        <input placeholder="Enter Message...." type="Text" />
-        <BsPaperclip
-          style={{
-            right: '3.3rem',
-            '--rot': '45deg',
-          }}
-          className={Styles.EnterMessageButton}
-          size="1.5rem"
-        />
-        <BsArrowRightCircleFill
-          style={{ right: '1.15rem' }}
-          className={Styles.EnterMessageButton}
-          size="1.5rem"
-        />
-      </div>
+      <EnterMessage />
+    </div>
+  );
+}
+
+function EnterMessage() {
+  const [message, setMessage] = useState('');
+  const [showEmoji, setShowEmoji] = useState(false);
+
+  return (
+    <div className={Styles.EnterMessage}>
+      {showEmoji && (
+        <div className={Styles.EmojiPicker || ''}>
+          <EmojiPicker
+            theme={Theme.DARK}
+            width="25rem"
+            height="20rem"
+            previewConfig={{
+              showPreview: false,
+            }}
+            onEmojiClick={(e) => {
+              setMessage(message + e.emoji);
+            }}
+          />
+        </div>
+      )}
+      <BsEmojiSmile
+        style={
+          showEmoji
+            ? {
+                left: '1.15rem',
+                color: '#6d99ec',
+              }
+            : {
+                left: '1.15rem',
+              }
+        }
+        className={Styles.EnterMessageButton}
+        size="1.4rem"
+        onClick={() => {
+          setShowEmoji(!showEmoji);
+        }}
+      />
+      <input
+        placeholder="Enter Message...."
+        type="Text"
+        value={message}
+        onChange={(e) => {
+          setMessage(e.target.value);
+        }}
+      />
+      <BsPaperclip
+        style={{
+          right: '3.3rem',
+          '--rot': '45deg',
+        }}
+        className={Styles.EnterMessageButton}
+        size="1.5rem"
+      />
+      <BsArrowRightCircleFill
+        style={{ right: '1.15rem' }}
+        className={Styles.EnterMessageButton}
+        size="1.5rem"
+      />
     </div>
   );
 }

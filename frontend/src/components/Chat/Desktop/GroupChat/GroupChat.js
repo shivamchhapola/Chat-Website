@@ -21,6 +21,7 @@ export default function GroupChat({ Styles }) {
         layoutStyle={GCStyles.GCList}
         title="Your Groups"
         isGC={true}
+        page="gc"
       />
       <GroupChatMenu selectedGroup={selectedGroup} />
       <GroupChatArea messages={Messages} layoutStyle={GCStyles.GCChat} />

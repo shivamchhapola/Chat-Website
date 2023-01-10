@@ -32,9 +32,9 @@ const signup = expressAsyncHandler(async (req, res) => {
   const username = req.body.username || nanoid(10); //provides a randomly generated username if not provided in the request body.
 
   //Empty fields check
-  if (!name) return res.status(500).send('"name" not found in body');
-  if (!email) return res.status(500).send('"email" not in body');
-  if (!password) return res.status(500).send('"password" not in body');
+  if (!name) return res.status(500).send('"name" not found');
+  if (!email) return res.status(500).send('"email" not found');
+  if (!password) return res.status(500).send('"password" not found');
 
   //Packs the data in a single variable for more redability
   const data = { username, name, email, password };

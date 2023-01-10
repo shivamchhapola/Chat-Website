@@ -94,7 +94,7 @@ hr {
 
 .ProfileComponent:hover {
   background-color: #323e52;
-  transform: scale(1.02);
+  transform: scale(1.01);
 }
 
 .ProfileIcon {
@@ -104,6 +104,12 @@ hr {
   background-color: #a0aec0;
   border-radius: 100%;
   overflow: hidden;
+}
+
+.ProfileIcon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .ProfileInfo {
@@ -314,6 +320,29 @@ hr {
 .SettingsOverlayItemContainer > span {
   width: 75%;
   --rot: 0;
+}
+
+.UploadProfilePicture {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 100%;
+  background-color: #242c3a;
+  color: #323e52;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all ease-in-out 0.2s;
+  overflow: hidden;
+}
+
+.UploadProfilePicture:hover {
+  color: #a0aec0;
+}
+
+.UploadProfilePicture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 @media only screen and (max-width: 600px) {

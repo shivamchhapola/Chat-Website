@@ -79,7 +79,7 @@
 .GCInfoCRContainer:hover,
 .GCInfoCRTitle:hover {
   color: #e2e8f0;
-  transform: scale(1.007);
+  transform: scale(1.005);
 }
 
 .GCInfoCR {
@@ -111,11 +111,12 @@
   align-items: center;
   top: 0;
   right: 0;
+  transition: all ease-in-out 0.2s;
 }
 
-.JoinGroupPanel {
-  width: 45%;
-  height: 30%;
+.JoinCreateGroupPanel {
+  width: var(--panelx);
+  height: var(--panely);
   background-color: #323e52;
   display: flex;
   justify-content: center;
@@ -125,30 +126,60 @@
   position: relative;
 }
 
-.JoinGroupPanel > input {
+.JoinCreateGroupPanelMain {
   width: 80%;
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem 0 1rem 0;
+}
+
+.JoinCreateGroupPanel input {
+  width: 100%;
   height: 2.3rem;
   background-color: #242c3a;
-  color: #a0aec0;
+  color: #e2e8f0;
   outline: none;
   border-radius: 0.4rem;
   padding: 0 1rem 0 1rem;
   position: relative;
 }
 
-.JoinGroupPanel button {
+.JoinCreateGroupPanel textarea {
+  width: 100%;
+  height: 6rem;
+  background-color: #242c3a;
+  color: #a0aec0;
+  outline: none;
+  border-radius: 0.4rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  position: relative;
+  resize: none;
+  font-size: 0.9rem;
+}
+
+.JoinCreateGroupPanelBottom {
+  width: 80%;
+  height: 4rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: row;
+}
+
+.JoinCreateGroupPanel button {
   width: 7rem;
   height: 2.1rem;
   color: #a0aec0;
   border: 0.1rem solid #a0aec0;
   border-radius: 0.4rem;
   position: relative;
-  top: 2rem;
-  margin: 0 3.5rem 0 3.5rem;
   transition: all ease-in-out 0.2s;
 }
 
-.JoinGroupPanel button:hover {
+.JoinCreateGroupPanel button:hover {
   --back: #a0aec0;
   --text: #323e52;
   background-color: var(--back);

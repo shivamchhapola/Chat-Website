@@ -28,12 +28,6 @@ function Join() {
     confirmPassword: '',
     email: '',
   });
-  const [user, setUser] = useState({
-    name: '',
-    username: '',
-    email: '',
-    token: '',
-  });
 
   const onLogin = async () => {
     if (!isLogin) {
@@ -52,10 +46,9 @@ function Join() {
       ? setJoinError({ ...joinError, login: validate.error.details[0].message })
       : await postdata('login', loginData)
           .then((res) => {
-            setUser(res.data);
             localStorage.setItem('user', JSON.stringify(res.data));
             console.log(JSON.parse(localStorage.getItem('user')));
-            navigate('/chat');
+            navigate('/gc');
           })
           .catch((err) =>
             setJoinError({
@@ -83,10 +76,9 @@ function Join() {
         })
       : await postdata('signup', signupData)
           .then((res) => {
-            setUser(res.data);
             localStorage.setItem('user', JSON.stringify(res.data));
             console.log(JSON.parse(localStorage.getItem('user')));
-            navigate('/chat');
+            navigate('/gc');
           })
           .catch((err) =>
             setJoinError({

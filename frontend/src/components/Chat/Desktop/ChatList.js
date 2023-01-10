@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Styles from './../../../styles/Chat/desktop.module.css';
 import ProfileComponent from '../ProfileComponent';
 import { RiMenuFill, RiAddLine, RiLink } from 'react-icons/ri';
-import JoinGroup from './GroupChat/JoinGroup';
+import { OneInputPanel, CreateGroup } from './PopupPanels';
 
 export default function ChatList({
   selectedChat,
@@ -10,10 +10,12 @@ export default function ChatList({
   chats,
   layoutStyle,
   title,
+  page,
 }) {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [joinOpen, setJoinOpen] = useState(false);
   const [createOpen, setCreateOpen] = useState(false);
+  const [addChat, setAddChat] = useState(false);
 
   return (
     <div className={layoutStyle}>
@@ -21,8 +23,11 @@ export default function ChatList({
         title={title}
         setSettingsOpen={setSettingsOpen}
         settingsOpen={settingsOpen}
+        page={page}
+        addChat={addChat}
+        setAddChat={setAddChat}
       />
-      {settingsOpen && (
+      {page === 'gc' && settingsOpen && (
         <Settings
           setCreateOpen={setCreateOpen}
           setJoinOpen={setJoinOpen}
@@ -48,30 +53,69 @@ export default function ChatList({
           );
         })}
       </div>
-      {joinOpen && <JoinGroup setJoinGroup={setJoinOpen} />}
+      {joinOpen && (
+        <OneInputPanel
+          setPanel={setJoinOpen}
+          placeholder="Enter Group ID"
+          onSubmit={() => {}}
+        />
+      )}
+      {createOpen && <CreateGroup setCreateGroup={setCreateOpen} />}
+      {addChat && (
+        <OneInputPanel
+          setPanel={setAddChat}
+          placeholder="Enter Username"
+          onSubmit={() => {}}
+        />
+      )}
     </div>
   );
 }
 
-function Title({ title, setSettingsOpen, settingsOpen }) {
+function Title({
+  title,
+  setSettingsOpen,
+  settingsOpen,
+  page,
+  addChat,
+  setAddChat,
+}) {
   return (
     <div className={Styles.SectionTitle}>
       <span
         className={Styles.TextOverflow}
-        style={{
-          width: '80%',
-        }}>
+        style={
+          page === 'gc'
+            ? {
+                width: '80%',
+              }
+            : {
+                width: '84%',
+              }
+        }>
         {title}
       </span>
-      <RiMenuFill
-        style={{
-          left: '0.85rem',
-          '--iconRot': '0deg',
-        }}
-        className={Styles.SpinningSectionIcons}
-        size="1.2rem"
-        onClick={() => setSettingsOpen(!settingsOpen)}
-      />
+      {page === 'gc' ? (
+        <RiMenuFill
+          style={{
+            left: '0.85rem',
+            '--iconRot': '0deg',
+          }}
+          className={Styles.SpinningSectionIcons}
+          size="1.2rem"
+          onClick={() => setSettingsOpen(!settingsOpen)}
+        />
+      ) : (
+        <RiAddLine
+          style={{
+            left: '0.85rem',
+            '--iconRot': '180deg',
+          }}
+          className={Styles.SpinningSectionIcons}
+          size="1.5rem"
+          onClick={() => setAddChat(!addChat)}
+        />
+      )}
     </div>
   );
 }
@@ -91,6 +135,7 @@ function Settings({
         onClick={() => {
           setJoinOpen(true);
           setSettingsOpen(false);
+          setCreateOpen(false);
         }}>
         <div
           style={{
@@ -105,6 +150,7 @@ function Settings({
         onClick={() => {
           setCreateOpen(true);
           setSettingsOpen(false);
+          setJoinOpen(false);
         }}>
         <div
           style={{

@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Styles from './../../../styles/Chat/desktop.module.css';
 import GroupChat from './GroupChat/GroupChat';
+import PersonalChat from './PersonalChat/PersonalChat';
+import Search from './Search/Search';
 import { MenuItem, MenuItemImage } from '../MenuItem';
 import WebFont from 'webfontloader';
 import { MdGroup, MdOutlineGroup } from 'react-icons/md';
@@ -10,54 +12,50 @@ import {
   RiSearch2Fill,
   RiSearch2Line,
 } from 'react-icons/ri';
+import { useNavigate } from 'react-router';
 
 //Demo
 import ProfilePic from '../../../assets/Demo/hikigaya.jpg';
 
-export default function Desktop() {
+export default function Desktop({ page }) {
+  const navigate = useNavigate();
+
   useEffect(() => {
     WebFont.load({
       google: {
         families: ['Fira Sans Condensed', 'Roboto', 'Noto Sans'],
       },
     });
-    const handleContextmenu = (e) => {
-      //e.preventDefault();
-    };
-    document.addEventListener('contextmenu', handleContextmenu);
-    return function cleanup() {
-      document.removeEventListener('contextmenu', handleContextmenu);
-    };
   }, []);
-
-  const [selectedMenu, setSelectedMenu] = useState('gc');
 
   return (
     <div className={Styles.Desktop}>
       <header>Chat Website</header>
       <div className={Styles.Menu}>
         <MenuItem
-          Image={selectedMenu === 'dm' ? RiChat2Fill : RiChat2Line}
-          Color={selectedMenu === 'dm' ? '#e2e8f0' : '#A0AEC0'}
-          onClick={() => setSelectedMenu('dm')}
+          Image={page === 'pc' ? RiChat2Fill : RiChat2Line}
+          Color={page === 'pc' ? '#e2e8f0' : '#A0AEC0'}
+          onClick={() => navigate('/pc')}
         />
         <MenuItem
-          Image={selectedMenu === 'gc' ? MdGroup : MdOutlineGroup}
-          Color={selectedMenu === 'gc' ? '#e2e8f0' : '#A0AEC0'}
-          onClick={() => setSelectedMenu('gc')}
+          Image={page === 'gc' ? MdGroup : MdOutlineGroup}
+          Color={page === 'gc' ? '#e2e8f0' : '#A0AEC0'}
+          onClick={() => navigate('/gc')}
         />
         <MenuItem
-          Image={selectedMenu === 'search' ? RiSearch2Fill : RiSearch2Line}
-          Color={selectedMenu === 'search' ? '#e2e8f0' : '#A0AEC0'}
-          onClick={() => setSelectedMenu('search')}
+          Image={page === 'search' ? RiSearch2Fill : RiSearch2Line}
+          Color={page === 'search' ? '#e2e8f0' : '#A0AEC0'}
+          onClick={() => navigate('/search')}
         />
         <MenuItemImage
           Image={ProfilePic}
-          Color={selectedMenu === 'profile' ? '#e2e8f0' : 'rgba(0,0,0,0)'}
-          onClick={() => setSelectedMenu('profile')}
+          Color={page === 'profile' ? '#6d99ec' : 'rgba(0,0,0,0)'}
+          onClick={() => navigate('/profile')}
         />
       </div>
-      <GroupChat Styles={Styles} />
+      {page === 'gc' && <GroupChat Styles={Styles} />}
+      {page === 'pc' && <PersonalChat Styles={Styles} />}
+      {page === 'search' && <Search Styles={Styles} />}
     </div>
   );
 }

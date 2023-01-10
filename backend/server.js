@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { ConnectDB } from './config/db.js';
 import { joinRouter } from './routes/join.js';
+import { groupRouter } from './routes/groupchat.js';
 import { errorHandler, notFound } from './middleware/error.js';
 
 dotenv.config();
@@ -18,8 +19,11 @@ app.get('/', (req, res) => {
   res.status(200).send('Nothing Here');
 });
 
-//User Signup and Login stuff
+//User, Signup and Login stuff
 app.use('/api', joinRouter);
+
+//Groupchat related stuff
+app.use('/api/group', groupRouter);
 
 //Error Handling
 app.use(notFound);

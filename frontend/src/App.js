@@ -11,7 +11,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} exact />
           <Route path="/join" element={<Join />} />
-          <Route path="/chat" element={<Chat />} />
+          <Route path="/gc" element={<Chat page="gc" />} />
+          <Route path="/pc" element={<Chat page="pc" />} />
+          <Route path="/search" element={<Chat page="search" />} />
         </Routes>
       </BrowserRouter>
     </div>

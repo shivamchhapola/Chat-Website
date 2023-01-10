@@ -6,10 +6,23 @@ const GroupChatModel = mongoose.Schema(
       type: String,
       required: true,
     },
+    image: {
+      type: String,
+      default: 'https://cdn-icons-png.flaticon.com/512/1769/1769041.png',
+    },
     name: {
       type: String,
       trim: true,
       required: true,
+    },
+    bio: {
+      type: String,
+      required: true,
+      default: '',
+    },
+    admin: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
     },
     rooms: [
       {
@@ -23,23 +36,6 @@ const GroupChatModel = mongoose.Schema(
         ref: 'User',
       },
     ],
-    admin: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-    },
-    passRequired: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-    password: {
-      type: String,
-    },
-    pic: {
-      type: String,
-      required: true,
-      default: 'https://cdn-icons-png.flaticon.com/512/1769/1769041.png',
-    },
   },
   {
     timestamps: true,

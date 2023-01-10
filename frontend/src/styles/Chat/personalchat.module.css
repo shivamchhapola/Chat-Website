@@ -1,0 +1,14 @@
+.PCList {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.PCChat {
+  background-color: #333f56;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
