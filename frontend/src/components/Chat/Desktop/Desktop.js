@@ -3,6 +3,7 @@ import Styles from './../../../styles/Chat/desktop.module.css';
 import GroupChat from './GroupChat/GroupChat';
 import PersonalChat from './PersonalChat/PersonalChat';
 import Search from './Search/Search';
+import Profile from './Profile/Profile';
 import { MenuItem, MenuItemImage } from '../MenuItem';
 import WebFont from 'webfontloader';
 import { MdGroup, MdOutlineGroup } from 'react-icons/md';
@@ -56,6 +57,7 @@ export default function Desktop({ page }) {
       {page === 'gc' && <GroupChat Styles={Styles} />}
       {page === 'pc' && <PersonalChat Styles={Styles} />}
       {page === 'search' && <Search Styles={Styles} />}
+      {page === 'profile' && <Profile Styles={Styles} />}
     </div>
   );
 }

@@ -14,6 +14,7 @@ function App() {
           <Route path="/gc" element={<Chat page="gc" />} />
           <Route path="/pc" element={<Chat page="pc" />} />
           <Route path="/search" element={<Chat page="search" />} />
+          <Route path="/profile" element={<Chat page="profile" />} />
         </Routes>
       </BrowserRouter>
     </div>
