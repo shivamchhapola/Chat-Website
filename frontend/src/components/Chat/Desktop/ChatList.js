@@ -98,7 +98,6 @@ function Title({
       {page === 'gc' ? (
         <RiMenuFill
           style={{
-            left: '0.85rem',
             '--iconRot': '0deg',
           }}
           className={Styles.SpinningSectionIcons}
@@ -108,7 +107,6 @@ function Title({
       ) : (
         <RiAddLine
           style={{
-            left: '0.85rem',
             '--iconRot': '180deg',
           }}
           className={Styles.SpinningSectionIcons}

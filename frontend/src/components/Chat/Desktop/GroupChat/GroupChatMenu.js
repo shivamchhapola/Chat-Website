@@ -22,7 +22,7 @@ export default function GroupChatMenu({ selectedGroup }) {
         </span>
         <RiSettings3Fill
           style={{
-            left: '0.85rem',
+            left: '0rem',
           }}
           className={Styles.SpinningSectionIcons}
           size="1.2rem"

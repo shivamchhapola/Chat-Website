@@ -1,0 +1,87 @@
+.ProfileContainer {
+  width: 100%;
+  height: 97vh;
+  display: flex;
+  justify-content: center;
+  padding: 3vh 0 4vh 0;
+}
+
+.ProfileContainer > div {
+  width: clamp(20rem, 53%, 40rem);
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  overflow-y: auto;
+  scrollbar-color: #242c3a #323e52;
+  scrollbar-width: thin;
+  flex-direction: column;
+}
+
+.ProfileContainer > div::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+.ProfileContainer > div::-webkit-scrollbar-thumb {
+  background: #242c3a;
+  border-radius: 0.25rem;
+}
+
+.ProfileContainer input {
+  width: clamp(15rem, 60%, 30rem);
+  height: 2.3rem;
+  background-color: #242c3a;
+  color: #e2e8f0;
+  outline: none;
+  border-radius: 0.4rem;
+  padding: 0 1rem 0 1rem;
+  margin-top: 1rem;
+  position: relative;
+}
+
+.ProfileContainer textarea {
+  width: clamp(15rem, 60%, 30rem);
+  height: 6rem;
+  background-color: #242c3a;
+  color: #a0aec0;
+  outline: none;
+  border-radius: 0.4rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  margin-top: 1rem;
+  position: relative;
+  resize: none;
+  font-size: 0.9rem;
+}
+
+.ProfileContainer button {
+  width: clamp(10rem, 40%, 20rem);
+  height: 2.1rem;
+  color: #a0aec0;
+  border: 0.1rem solid #a0aec0;
+  border-radius: 0.4rem;
+  position: relative;
+  margin-top: 1rem;
+  transition: all ease-in-out 0.2s;
+}
+
+.ProfileContainer button:hover {
+  --back: #a0aec0;
+  --text: #323e52;
+  background-color: var(--back);
+  border: 0.1rem solid var(--back);
+  color: var(--text);
+}
+
+.ChangePass {
+  width: clamp(15rem, 60%, 30rem);
+  text-align: right;
+  font-size: smaller;
+  color: #a0aec0;
+  margin-right: 0.5rem;
+  text-decoration: underline;
+  transition: all ease-in-out 0.2s;
+}
+
+.ChangePass:hover {
+  color: #e2e8f0;
+  cursor: pointer;
+}

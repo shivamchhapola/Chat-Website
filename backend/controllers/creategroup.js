@@ -1,5 +1,6 @@
 import expressAsyncHandler from 'express-async-handler';
 import GroupChatModel from '../models/GroupChatModel.js';
+import ChatModel from '../models/ChatModel.js';
 import { nanoid } from 'nanoid';
 
 const creategroup = expressAsyncHandler(async (req, res) => {
@@ -15,6 +16,12 @@ const creategroup = expressAsyncHandler(async (req, res) => {
 
   const createdGroup = await GroupChatModel.create(data).catch((err) => {
     return res.status(500).send('Could not create a Groupchat: ' + err);
+  });
+
+  const generalChatRoom = await ChatModel.create({
+    chatName: 'general',
+    isGroupChat: true,
+    groupChat: createdGroup._id,
   });
 
   if (createdGroup)

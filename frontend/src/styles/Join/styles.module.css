@@ -166,6 +166,10 @@
   color: #e2e8f0;
 }
 
+.InputFieldText:focus {
+  outline: #a0aec0 solid 1px;
+}
+
 .InputFieldText::placeholder {
   color: #e2e8f0;
 }

@@ -18,7 +18,7 @@ export default function PersonalChat({ Styles }) {
         setSelectedChat={setSelectedChat}
         chats={Groups}
         layoutStyle={PCStyles.PCList}
-        title="Your Groups"
+        title="Your Chats"
         isGC={true}
         page="pc"
       />
