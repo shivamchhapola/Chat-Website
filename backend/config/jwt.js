@@ -5,3 +5,10 @@ export const generateToken = (id) => {
     expiresIn: '30d',
   });
 };
+
+export const verifyToken = (token) => {
+  jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
+    if (err) return 0;
+    return data;
+  });
+};

@@ -23,6 +23,7 @@ const GroupChatModel = mongoose.Schema(
     admin: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
+      required: true,
     },
     rooms: [
       {
@@ -30,7 +31,7 @@ const GroupChatModel = mongoose.Schema(
         ref: 'Chat',
       },
     ],
-    users: [
+    members: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -44,4 +45,4 @@ const GroupChatModel = mongoose.Schema(
 
 const GroupChat = mongoose.model('GroupChat', GroupChatModel);
 
-module.exports = GroupChat;
+export default GroupChat;

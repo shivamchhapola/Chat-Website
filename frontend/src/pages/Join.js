@@ -46,8 +46,7 @@ function Join() {
       ? setJoinError({ ...joinError, login: validate.error.details[0].message })
       : await postdata('login', loginData)
           .then((res) => {
-            localStorage.setItem('user', JSON.stringify(res.data));
-            console.log(JSON.parse(localStorage.getItem('user')));
+            localStorage.setItem('user', res.data);
             navigate('/gc');
           })
           .catch((err) =>
@@ -76,7 +75,7 @@ function Join() {
         })
       : await postdata('signup', signupData)
           .then((res) => {
-            localStorage.setItem('user', JSON.stringify(res.data));
+            localStorage.setItem('user', res.data);
             console.log(JSON.parse(localStorage.getItem('user')));
             navigate('/gc');
           })

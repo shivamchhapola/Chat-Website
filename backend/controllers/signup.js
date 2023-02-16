@@ -53,13 +53,7 @@ const signup = expressAsyncHandler(async (req, res) => {
   const user = await User.create(data).catch((err) => {
     return res.status(500).send('Could not create an account: ' + err);
   });
-  if (user)
-    return res.status(200).json({
-      name: user.name,
-      username: user.username,
-      email: user.email,
-      token: generateToken(user._id),
-    });
+  if (user) res.status(200).send(generateToken(user._id));
 });
 
 export default signup;

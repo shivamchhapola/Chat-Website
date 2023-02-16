@@ -22,4 +22,4 @@ const MessageModel = mongoose.Schema(
 
 const Message = mongoose.model('Message', MessageModel);
 
-module.exports = Message;
+export default Message;

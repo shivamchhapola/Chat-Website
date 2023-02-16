@@ -25,6 +25,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.1",
     "nanoid": "^4.0.0",
+    "node-fetch": "^3.3.0",
     "nodemon": "^2.0.19",
     "react-router-dom": "^6.4.0"
   }

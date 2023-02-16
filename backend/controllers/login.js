@@ -27,12 +27,7 @@ const login = expressAsyncHandler(async (req, res) => {
 
   const match = await user.matchPass(password);
   return match
-    ? res.status(200).json({
-        name: user.name,
-        username: user.username,
-        email: user.email,
-        token: generateToken(user._id),
-      })
+    ? res.status(200).send(generateToken(user._id))
     : res.status(400).send('Incorrect Password or Username/Email');
 });
 

@@ -30,6 +30,18 @@ const UserSchema = mongoose.Schema(
       type: String,
       default: 'https://cdn-icons-png.flaticon.com/512/456/456283.png',
     },
+    groups: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'GroupChat',
+      },
+    ],
+    chats: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
   },
   {
     timestamps: true,
