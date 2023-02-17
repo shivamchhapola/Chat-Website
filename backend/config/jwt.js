@@ -8,7 +8,7 @@ export const generateToken = (id) => {
 
 export const verifyToken = (token) => {
   jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
-    if (err) return 0;
+    if (err) throw err;
     return data;
   });
 };

@@ -5,6 +5,8 @@ import { ConnectDB } from './config/db.js';
 import { joinRouter } from './routes/join.js';
 import { groupRouter } from './routes/groupchat.js';
 import { errorHandler, notFound } from './middleware/error.js';
+import { userRouter } from './routes/user.js';
+import { messageRouter } from './routes/message.js';
 
 dotenv.config();
 
@@ -24,6 +26,12 @@ app.use('/api', joinRouter);
 
 //Groupchat related stuff
 app.use('/api/group', groupRouter);
+
+//User related stuff
+app.use('/api/user', userRouter);
+
+//Message related stuff
+app.use('/api/message', messageRouter);
 
 //Error Handling
 app.use(notFound);

@@ -143,7 +143,7 @@ export const fetchChatRoom = expressAsyncHandler(async (req, res) => {
 });
 
 export const addMember = expressAsyncHandler(async (req, res) => {
-  GroupChatModel.findById(req.body.gid)
+  await GroupChatModel.findById(req.body.gid)
     .catch((e) => {
       return res.status(500).send('Could not find the group: ' + e);
     })
@@ -151,5 +151,37 @@ export const addMember = expressAsyncHandler(async (req, res) => {
       group.members.push(req.body.mid);
       group.save();
       return res.status(200).send('Added Member: ' + req.body.mid);
+    });
+});
+
+export const removeMember = expressAsyncHandler(async (req, res) => {
+  await GroupChatModel.findById(req.body.gid)
+    .catch((e) => {
+      return res.status(500).send('Could not find the group: ' + e);
+    })
+    .then((g) => {
+      g.members = g.members.filter((i) => i != req.body.mid);
+      g.save();
+      return res.status(200).send('Removed Member: ' + req.body.mid);
+    });
+});
+
+export const removeChatroom = expressAsyncHandler(async (req, res) => {
+  await GroupChatModel.findById(req.body.gid)
+    .catch((e) => {
+      return res.status(500).send('Could not find the group: ' + e);
+    })
+    .then((g) => {
+      g.rooms = g.rooms.filter((i) => i != req.body.cid);
+      g.save();
+      fetch('http://localhost:9000/api/group/deletechatroom', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: req.body.cid }),
+      });
+      return res.status(200).send('Removed Chatroom: ' + req.body.cid);
     });
 });

@@ -1,8 +1,5 @@
 import expressAsyncHandler from 'express-async-handler';
 import UserModel from '../models/UserModel.js';
-import { verifyToken } from '../config/jwt.js';
-
-export const verifyUser = expressAsyncHandler(async (req, res) => {});
 
 export const fetchUser = expressAsyncHandler(async (req, res) => {
   await UserModel.findById(req.body.id)
