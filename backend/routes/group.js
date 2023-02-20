@@ -12,6 +12,7 @@ import {
   addMember,
   removeMember,
   removeChatroom,
+  findGroup,
 } from '../controllers/group.js';
 
 const groupRouter = Router();
@@ -27,5 +28,6 @@ groupRouter.post('/fetchchatroom', authUser, fetchChatRoom);
 groupRouter.post('/addMember', authUser, addMember);
 groupRouter.post('/removeMember', authUser, removeMember);
 groupRouter.post('/removeChatroom', authUser, removeChatroom);
+groupRouter.post('/findGroup', authUser, findGroup);
 
 export { groupRouter };

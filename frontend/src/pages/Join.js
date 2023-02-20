@@ -13,6 +13,7 @@ export const JoinContext = React.createContext();
 function Join() {
   const navigate = useNavigate();
 
+  const [user, setUser] = useState(localStorage.getItem('user'));
   const [isLogin, setIsLogin] = useState(true);
   const [joinError, setJoinError] = useState({
     login: '',
@@ -100,11 +101,13 @@ function Join() {
     onSignup,
   };
   useEffect(() => {
+    setUser(localStorage.getItem('user'));
     WebFont.load({
       google: {
         families: ['Dosis', 'Plus Jakarta Sans'],
       },
     });
+    if (user) navigate('/gc');
   }, []);
 
   return (

@@ -34,10 +34,13 @@ export const createGroup = expressAsyncHandler(async (req, res) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ name: 'general', id: group._id }),
-      }).then((g) => {
-        if (g.status === 200)
-          return res.status(200).send('Created group: ' + group);
-      });
+      })
+        .then((g) => {
+          return res.status(200).json(group);
+        })
+        .catch((e) => {
+          return res.status(500).send('Could not create a Groupchat: ' + e);
+        });
     });
 });
 
@@ -56,9 +59,11 @@ export const createChatRoom = expressAsyncHandler(async (req, res) => {
           return res.status(500).send('Could not find the group: ' + e);
         })
         .then((group) => {
+          if (group.admin !== req.user)
+            return res.status(500).send('Invalid request: ' + group);
           group.rooms.push(chatroom._id);
           group.save();
-          return res.status(200).send('Created Chatroom: ' + chatroom._id);
+          return res.status(200).json(chatroom);
         });
     });
 });
@@ -183,5 +188,15 @@ export const removeChatroom = expressAsyncHandler(async (req, res) => {
         body: JSON.stringify({ id: req.body.cid }),
       });
       return res.status(200).send('Removed Chatroom: ' + req.body.cid);
+    });
+});
+
+export const findGroup = expressAsyncHandler(async (req, res) => {
+  await GroupChatModel.find({ uniqueId: req.body.uid })
+    .catch((e) => {
+      return res.status(500).send('Could not Fetch the Group: ' + e);
+    })
+    .then((group) => {
+      return res.status(200).json(group[0]);
     });
 });

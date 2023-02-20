@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { RiSettings3Fill } from 'react-icons/ri';
 import GCStyles from './../../../../styles/Chat/groupchat.module.css';
 import Styles from './../../../../styles/Chat/desktop.module.css';
@@ -8,8 +8,67 @@ import {
   MdSubdirectoryArrowRight,
   MdAdd,
 } from 'react-icons/md';
+import axios from 'axios';
+import { OneInputPanel } from '../PopupPanels';
 
-export default function GroupChatMenu({ selectedGroup }) {
+export default function GroupChatMenu({ selectedGroup, user }) {
+  const [chatrooms, setChatrooms] = useState([]);
+  const [selectedChatroom, setSelectedChatroom] = useState({});
+  const [addChatPanelOpen, setAddChatPanelOpen] = useState(false);
+
+  const fetchChatrooms = async (ids) => {
+    let cr = [];
+    return Promise.all(
+      ids.map(async (id) => {
+        await axios
+          .post(
+            'http://localhost:9000/api/group/fetchchatroom',
+            JSON.stringify({ id: id }),
+            {
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${user}`,
+              },
+            }
+          )
+          .then((res) => {
+            return cr.push(res.data);
+          })
+          .catch((e) => {
+            throw e;
+          });
+      })
+    ).then((res) => {
+      setSelectedChatroom(cr[0]);
+      setChatrooms(cr);
+    });
+  };
+
+  const addChatroom = async (n) => {
+    return await axios
+      .post(
+        'http://localhost:9000/api/group/createChatRoom',
+        JSON.stringify({ name: n, id: selectedGroup._id }),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${user}`,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.status === 500) return;
+        return setChatrooms([...chatrooms, res.data]);
+      })
+      .catch((e) => {
+        throw e;
+      });
+  };
+
+  useEffect(() => {
+    if (selectedGroup.rooms) fetchChatrooms(selectedGroup.rooms);
+  }, [selectedGroup]);
+
   return (
     <div className={GCStyles.GCInfo}>
       <div className={Styles.SectionTitle}>
@@ -39,7 +98,8 @@ export default function GroupChatMenu({ selectedGroup }) {
             <MdGroup size="1.3rem" />
           </span>
           <div className={GCStyles.GCInfoItemTitle}>
-            Total Members: {selectedGroup.members.length}
+            Total Members:
+            {selectedGroup.members ? selectedGroup.members.length : ''}
           </div>
         </div>
         <div className={GCStyles.GCInfoItemContainer}>
@@ -61,41 +121,42 @@ export default function GroupChatMenu({ selectedGroup }) {
             Chatrooms
           </div>
           <span
+            onClick={() => setAddChatPanelOpen(true)}
             style={{ '--posRight': '0.25rem' }}
             className={Styles.SpinningSectionIcons}>
             <MdAdd size="1.35rem" />
           </span>
+          {addChatPanelOpen && (
+            <OneInputPanel
+              setPanel={setAddChatPanelOpen}
+              placeholder="Add Chatroom"
+              onSubmit={addChatroom}
+            />
+          )}
         </div>
         <div className={GCStyles.GCInfoCR}>
-          <div
-            className={GCStyles.GCInfoCRContainer}
-            style={{
-              backgroundColor: '#1E283D',
-              borderRadius: '0.3rem',
-            }}>
-            <span
-              style={{
-                color: '#e2e8f0',
-              }}>
-              <MdSubdirectoryArrowRight size="1.2rem" />
-            </span>
-            <div
-              className={GCStyles.GCInfoCRTitle}
-              style={{
-                color: '#e2e8f0',
-              }}>
-              test
-            </div>
-          </div>
-          {selectedGroup.chatrooms.map((cr, i) => {
+          {chatrooms.map((cr) => {
             return (
-              <div className={GCStyles.GCInfoCRContainer} key={i}>
+              <div
+                className={GCStyles.GCInfoCRContainer}
+                key={cr._id}
+                onClick={() => {
+                  !(selectedChatroom._id === cr._id) && setSelectedChatroom(cr);
+                }}
+                style={
+                  selectedChatroom._id === cr._id
+                    ? {
+                        backgroundColor: '#1E283D',
+                        borderRadius: '0.3rem',
+                      }
+                    : {}
+                }>
                 <span>
                   <MdSubdirectoryArrowRight size="1.2rem" />
                 </span>
                 <div
                   className={`${GCStyles.GCInfoCRTitle} ${Styles.TextOverflow}`}>
-                  {cr}
+                  {cr.chatName}
                 </div>
               </div>
             );

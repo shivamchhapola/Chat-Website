@@ -9,12 +9,12 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Homepage />} exact />
-          <Route path="/join" element={<Join />} />
-          <Route path="/gc" element={<Chat page="gc" />} />
-          <Route path="/pc" element={<Chat page="pc" />} />
-          <Route path="/search" element={<Chat page="search" />} />
-          <Route path="/profile" element={<Chat page="profile" />} />
+          <Route exact path="/" element={<Homepage />} />
+          <Route exact path="/join" element={<Join />} />
+          <Route exact path="/gc" element={<Chat page="gc" />} />
+          <Route exact path="/pc" element={<Chat page="pc" />} />
+          <Route exact path="/search" element={<Chat page="search" />} />
+          <Route exact path="/profile" element={<Chat page="profile" />} />
         </Routes>
       </BrowserRouter>
     </div>

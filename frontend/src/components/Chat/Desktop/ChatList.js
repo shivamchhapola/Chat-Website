@@ -3,6 +3,7 @@ import Styles from './../../../styles/Chat/desktop.module.css';
 import ProfileComponent from '../ProfileComponent';
 import { RiMenuFill, RiAddLine, RiLink } from 'react-icons/ri';
 import { OneInputPanel, CreateGroup } from './PopupPanels';
+import axios from 'axios';
 
 export default function ChatList({
   selectedChat,
@@ -11,11 +12,71 @@ export default function ChatList({
   layoutStyle,
   title,
   page,
+  user,
+  userData,
 }) {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [joinOpen, setJoinOpen] = useState(false);
   const [createOpen, setCreateOpen] = useState(false);
   const [addChat, setAddChat] = useState(false);
+
+  const joinGroup = async (id) => {
+    return await axios
+      .post(
+        'http://localhost:9000/api/group/findgroup',
+        JSON.stringify({ uid: id }),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${user}`,
+          },
+        }
+      )
+      .then(async (res) => {
+        return await axios
+          .post(
+            'http://localhost:9000/api/group/addmember',
+            JSON.stringify({ gid: res.data._id, mid: userData._id }),
+            {
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${user}`,
+              },
+            }
+          )
+          .then((re) => {
+            if (res.status === 500) return;
+            return chats.push(res);
+          })
+          .catch((e) => {
+            throw e;
+          });
+      })
+      .catch((e) => {
+        throw e;
+      });
+  };
+
+  const createGroup = async (image, name, bio) => {
+    return await axios
+      .post(
+        'http://localhost:9000/api/group/createGroup',
+        JSON.stringify({ image: image, name: name, bio: bio }),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${user}`,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.status === 500) return;
+        return chats.push(res);
+      })
+      .catch((e) => {
+        throw e;
+      });
+  };
 
   return (
     <div className={layoutStyle}>
@@ -39,16 +100,16 @@ export default function ChatList({
       )}
       <hr />
       <div className={`${Styles.FlexColumns} ${Styles.ProfileListScrollable}`}>
-        {chats.map((chat) => {
+        {chats.map((c) => {
           return (
             <ProfileComponent
               Styles={Styles}
-              key={chat._id}
-              Name={chat.name}
-              Desc={chat.desc}
-              Image={chat.img}
-              Selected={selectedChat._id === chat._id}
-              onClick={() => setSelectedChat(chat)}
+              key={c._id}
+              Name={c.name}
+              Desc={c.bio}
+              Image={c.image}
+              Selected={selectedChat._id === c._id}
+              onClick={() => setSelectedChat(c)}
             />
           );
         })}
@@ -57,7 +118,7 @@ export default function ChatList({
         <OneInputPanel
           setPanel={setJoinOpen}
           placeholder="Enter Group ID"
-          onSubmit={() => {}}
+          onSubmit={joinGroup}
         />
       )}
       {createOpen && <CreateGroup setCreateGroup={setCreateOpen} />}

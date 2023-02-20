@@ -30,8 +30,11 @@ export function OneInputPanel({ setPanel, placeholder, onSubmit }) {
           </button>
           <button
             style={{ '--back': '#699adb', '--text': '#323e52' }}
-            onClick={onSubmit}>
-            Chat
+            onClick={() => {
+              console.log(onSubmit(id));
+              setPanel(false);
+            }}>
+            Submit
           </button>
         </div>
       </div>
@@ -39,7 +42,7 @@ export function OneInputPanel({ setPanel, placeholder, onSubmit }) {
   );
 }
 
-export function CreateGroup({ setCreateGroup }) {
+export function CreateGroup({ setCreateGroup, onCreate }) {
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
   const [bio, setBio] = useState('');
@@ -100,7 +103,12 @@ export function CreateGroup({ setCreateGroup }) {
             }}>
             Close
           </button>
-          <button style={{ '--back': '#70da79', '--text': '#323e52' }}>
+          <button
+            style={{ '--back': '#70da79', '--text': '#323e52' }}
+            onClick={() => {
+              onCreate(image, name, bio);
+              setCreateGroup(false);
+            }}>
             Create
           </button>
         </div>

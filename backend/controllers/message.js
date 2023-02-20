@@ -1,5 +1,5 @@
 import expressAsyncHandler from 'express-async-handler';
-import Message from '../models/MessageModel';
+import Message from '../models/MessageModel.js';
 
 export const createMessage = expressAsyncHandler(async (req, res) => {
   if (!req.body.sender || !req.body.content || !req.body.chat)

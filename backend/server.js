@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { ConnectDB } from './config/db.js';
 import { joinRouter } from './routes/join.js';
-import { groupRouter } from './routes/groupchat.js';
+import { groupRouter } from './routes/group.js';
 import { errorHandler, notFound } from './middleware/error.js';
 import { userRouter } from './routes/user.js';
 import { messageRouter } from './routes/message.js';
@@ -37,6 +37,6 @@ app.use('/api/message', messageRouter);
 app.use(notFound);
 app.use(errorHandler);
 
-app.listen(process.env.PORT || '5000', () => {
-  console.log('Server Started on ' + (process.env.PORT || '5000'));
+app.listen(process.env.PORT || '9000', () => {
+  console.log('Server Started on ' + (process.env.PORT || '9000'));
 });
