@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import TransparentImage from './../../assets/Images/transparent.png';
 
 export default function MessageComponent({
@@ -9,6 +9,14 @@ export default function MessageComponent({
   Message,
   SendByMe,
 }) {
+  const [date, setDate] = useState('');
+
+  useEffect(() => {
+    const d = new Date(Time);
+    if (d != 'Invalid Date') setDate(d.toLocaleString());
+    else setDate('');
+  }, [Time]);
+
   return (
     <div
       className={Styles.Message}
@@ -44,7 +52,7 @@ export default function MessageComponent({
               : {}
           }>
           <span className={Styles.MessageContentTopName}>{Name}</span>
-          <span className={Styles.MessageContentTopTime}>{Time}</span>
+          <span className={Styles.MessageContentTopTime}>{date}</span>
         </div>
         <div className={Styles.MessageContentBottom}>
           <p
@@ -58,7 +66,7 @@ export default function MessageComponent({
                   }
                 : {}
             }>
-            {Message.text}
+            {Message}
           </p>
         </div>
       </div>

@@ -9,12 +9,13 @@ import Groups from '../../../../assets/Demo/GroupListDemo';
 import Messages from '../../../../assets/Demo/MessageListDemo';
 import axios from 'axios';
 
-export default function GroupChat({ Styles, userData }) {
-  const [user, setUser] = useState(localStorage.getItem('user'));
+export default function GroupChat({ Styles, userData, user }) {
+  //const [user, setUser] = useState(localStorage.getItem('user'));
   const [groups, setGroups] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState({});
+  const [selectedChatroom, setSelectedChatroom] = useState({});
 
-  const fetchGroup = async (ids) => {
+  const fetchGroups = async (ids) => {
     let g = [];
     return Promise.all(
       ids.map(async (id) => {
@@ -43,11 +44,22 @@ export default function GroupChat({ Styles, userData }) {
   };
 
   useEffect(() => {
-    setUser(localStorage.getItem('user'));
-    if (userData.groups) fetchGroup(userData.groups);
+    //setUser(localStorage.getItem('user'));
+    if (userData.groups) fetchGroups(userData.groups);
   }, [userData]);
 
   useEffect(() => {}, [groups]);
+
+  useEffect(() => {
+    setGroups(
+      groups.map((group) => {
+        if (group === selectedGroup) {
+          group.rooms = selectedGroup.rooms;
+        }
+        return group;
+      })
+    );
+  }, [selectedGroup]);
 
   return (
     <div className={Styles.MainContent}>
@@ -61,9 +73,19 @@ export default function GroupChat({ Styles, userData }) {
         page="gc"
         user={user}
         userData={userData}
+        setChats={setGroups}
       />
-      <GroupChatMenu selectedGroup={selectedGroup} user={user} />
-      <GroupChatArea messages={Messages} layoutStyle={GCStyles.GCChat} />
+      <GroupChatMenu
+        selectedGroup={selectedGroup}
+        user={user}
+        selectedChatroom={selectedChatroom}
+        setSelectedChatroom={setSelectedChatroom}
+      />
+      <GroupChatArea
+        layoutStyle={GCStyles.GCChat}
+        chat={selectedChatroom}
+        user={user}
+      />
     </div>
   );
 }

@@ -3,8 +3,8 @@ import mongoose from 'mongoose';
 const MessageModel = mongoose.Schema(
   {
     sender: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      type: String,
+      trim: true,
     },
     content: {
       type: String,
@@ -13,6 +13,10 @@ const MessageModel = mongoose.Schema(
     chat: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Chat',
+    },
+    pic: {
+      type: String,
+      trim: true,
     },
   },
   {

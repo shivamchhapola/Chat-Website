@@ -11,9 +11,13 @@ import {
 import axios from 'axios';
 import { OneInputPanel } from '../PopupPanels';
 
-export default function GroupChatMenu({ selectedGroup, user }) {
+export default function GroupChatMenu({
+  selectedGroup,
+  user,
+  selectedChatroom,
+  setSelectedChatroom,
+}) {
   const [chatrooms, setChatrooms] = useState([]);
-  const [selectedChatroom, setSelectedChatroom] = useState({});
   const [addChatPanelOpen, setAddChatPanelOpen] = useState(false);
 
   const fetchChatrooms = async (ids) => {
@@ -58,6 +62,7 @@ export default function GroupChatMenu({ selectedGroup, user }) {
       )
       .then((res) => {
         if (res.status === 500) return;
+        selectedGroup.rooms.push(res.data._id);
         return setChatrooms([...chatrooms, res.data]);
       })
       .catch((e) => {
@@ -102,12 +107,12 @@ export default function GroupChatMenu({ selectedGroup, user }) {
             {selectedGroup.members ? selectedGroup.members.length : ''}
           </div>
         </div>
-        <div className={GCStyles.GCInfoItemContainer}>
+        {/*<div className={GCStyles.GCInfoItemContainer}>
           <span>
             <MdPersonAddAlt1 size="1.3rem" />
           </span>
           <div className={GCStyles.GCInfoItemTitle}>Invite People</div>
-        </div>
+      </div>*/}
         <div
           className={GCStyles.GCInfoItemContainer}
           style={{

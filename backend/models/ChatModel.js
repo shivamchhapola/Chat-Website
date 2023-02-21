@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const ChatModel = mongoose.Schema(
   {
-    chatName: {
+    name: {
       type: String,
       trim: true,
     },

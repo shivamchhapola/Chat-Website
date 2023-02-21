@@ -31,7 +31,7 @@ export function OneInputPanel({ setPanel, placeholder, onSubmit }) {
           <button
             style={{ '--back': '#699adb', '--text': '#323e52' }}
             onClick={() => {
-              console.log(onSubmit(id));
+              onSubmit(id);
               setPanel(false);
             }}>
             Submit

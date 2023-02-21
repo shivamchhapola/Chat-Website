@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Styles from './../../../styles/Chat/desktop.module.css';
 import ProfileComponent from '../ProfileComponent';
 import { RiMenuFill, RiAddLine, RiLink } from 'react-icons/ri';
@@ -14,11 +14,34 @@ export default function ChatList({
   page,
   user,
   userData,
+  setChats,
 }) {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [joinOpen, setJoinOpen] = useState(false);
   const [createOpen, setCreateOpen] = useState(false);
   const [addChat, setAddChat] = useState(false);
+
+  const addPChat = async (id) => {
+    return await axios
+      .post(
+        'http://localhost:9000/api/personal/addPersonal',
+        JSON.stringify({ id }),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${user}`,
+          },
+        }
+      )
+      .catch((e) => {
+        console.log(e);
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 500) return;
+        return setChats([...chats, res.data]);
+      });
+  };
 
   const joinGroup = async (id) => {
     return await axios
@@ -46,7 +69,7 @@ export default function ChatList({
           )
           .then((re) => {
             if (res.status === 500) return;
-            return chats.push(res);
+            return setChats([...chats, res.data]);
           })
           .catch((e) => {
             throw e;
@@ -71,7 +94,7 @@ export default function ChatList({
       )
       .then((res) => {
         if (res.status === 500) return;
-        return chats.push(res);
+        return setChats([...chats, res.data]);
       })
       .catch((e) => {
         throw e;
@@ -107,7 +130,7 @@ export default function ChatList({
               key={c._id}
               Name={c.name}
               Desc={c.bio}
-              Image={c.image}
+              Image={c.pic}
               Selected={selectedChat._id === c._id}
               onClick={() => setSelectedChat(c)}
             />
@@ -121,12 +144,14 @@ export default function ChatList({
           onSubmit={joinGroup}
         />
       )}
-      {createOpen && <CreateGroup setCreateGroup={setCreateOpen} />}
+      {createOpen && (
+        <CreateGroup setCreateGroup={setCreateOpen} onCreate={createGroup} />
+      )}
       {addChat && (
         <OneInputPanel
           setPanel={setAddChat}
           placeholder="Enter Username"
-          onSubmit={() => {}}
+          onSubmit={addPChat}
         />
       )}
     </div>

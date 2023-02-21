@@ -5,10 +5,10 @@ import ChatModel from '../models/ChatModel.js';
 import { nanoid } from 'nanoid';
 
 export const createGroup = expressAsyncHandler(async (req, res) => {
-  const { image, name, bio, admin } = req.body;
+  const { image, name, bio } = req.body;
+  const admin = req.user.id;
   const uniqueId = nanoid(10);
 
-  if (!image) return res.status(500).send('"image" not found');
   if (!name) return res.status(500).send('"name" not found');
   if (!bio) return res.status(500).send('"bio" not found');
   if (!admin) return res.status(500).send('"admin" not found');
@@ -32,10 +32,20 @@ export const createGroup = expressAsyncHandler(async (req, res) => {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          authorization: req.token,
         },
         body: JSON.stringify({ name: 'general', id: group._id }),
       })
-        .then((g) => {
+        .then((cr) => {
+          fetch('http://localhost:9000/api/user/updateUser', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              authorization: req.token,
+            },
+            body: JSON.stringify({ $addToSet: { groups: group._id } }),
+          });
           return res.status(200).json(group);
         })
         .catch((e) => {
@@ -59,7 +69,7 @@ export const createChatRoom = expressAsyncHandler(async (req, res) => {
           return res.status(500).send('Could not find the group: ' + e);
         })
         .then((group) => {
-          if (group.admin !== req.user)
+          if (group.admin != req.user.id)
             return res.status(500).send('Invalid request: ' + group);
           group.rooms.push(chatroom._id);
           group.save();
@@ -80,6 +90,7 @@ export const deleteGroup = expressAsyncHandler(async (req, res) => {
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
+            authorization: req.token,
           },
           body: JSON.stringify({ id: room._id }),
         });
@@ -155,6 +166,15 @@ export const addMember = expressAsyncHandler(async (req, res) => {
     .then((group) => {
       group.members.push(req.body.mid);
       group.save();
+      fetch('http://localhost:9000/api/user/updateUser', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          authorization: req.token,
+        },
+        body: JSON.stringify({ $addToSet: { groups: group._id } }),
+      });
       return res.status(200).send('Added Member: ' + req.body.mid);
     });
 });
@@ -184,6 +204,7 @@ export const removeChatroom = expressAsyncHandler(async (req, res) => {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          authorization: req.token,
         },
         body: JSON.stringify({ id: req.body.cid }),
       });

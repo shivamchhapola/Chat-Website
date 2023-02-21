@@ -67,21 +67,27 @@ export default function Desktop({ page }) {
           Color={page === 'gc' ? '#e2e8f0' : '#A0AEC0'}
           onClick={() => navigate('/gc')}
         />
-        <MenuItem
+        {/*<MenuItem
           Image={page === 'search' ? RiSearch2Fill : RiSearch2Line}
           Color={page === 'search' ? '#e2e8f0' : '#A0AEC0'}
           onClick={() => navigate('/search')}
-        />
+        />*/}
         <MenuItemImage
           Image={ProfilePic}
           Color={page === 'profile' ? '#6d99ec' : 'rgba(0,0,0,0)'}
           onClick={() => navigate('/profile')}
         />
       </div>
-      {page === 'gc' && <GroupChat Styles={Styles} userData={userData} />}
-      {page === 'pc' && <PersonalChat Styles={Styles} />}
-      {page === 'search' && <Search Styles={Styles} />}
-      {page === 'profile' && <Profile Styles={Styles} />}
+      {page === 'gc' && (
+        <GroupChat Styles={Styles} userData={userData} user={user} />
+      )}
+      {page === 'pc' && (
+        <PersonalChat Styles={Styles} userData={userData} user={user} />
+      )}
+      {/*page === 'search' && <Search Styles={Styles} />*/}
+      {page === 'profile' && (
+        <Profile Styles={Styles} userData={userData} user={user} />
+      )}
     </div>
   );
 }

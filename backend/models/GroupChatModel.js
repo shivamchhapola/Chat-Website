@@ -6,7 +6,7 @@ const GroupChatModel = mongoose.Schema(
       type: String,
       required: true,
     },
-    image: {
+    pic: {
       type: String,
       default: 'https://cdn-icons-png.flaticon.com/512/1769/1769041.png',
     },

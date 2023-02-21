@@ -7,6 +7,7 @@ import { groupRouter } from './routes/group.js';
 import { errorHandler, notFound } from './middleware/error.js';
 import { userRouter } from './routes/user.js';
 import { messageRouter } from './routes/message.js';
+import { personalRouter } from './routes/personal.js';
 
 dotenv.config();
 
@@ -32,6 +33,9 @@ app.use('/api/user', userRouter);
 
 //Message related stuff
 app.use('/api/message', messageRouter);
+
+//Personal Message stuff
+app.use('/api/personal', personalRouter);
 
 //Error Handling
 app.use(notFound);
